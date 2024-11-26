@@ -1,31 +1,8 @@
-##import streamlit as st
-##def main():
-##    st.title("GENSLO v1.0")
-##    st.header("Superficies Limitadoras de Obstáculos - GTA UNLP")
-##    t_Aprox=st.selectbox('Tipo de Aproximación',['Visual','No Precision','Precision CAT I','Precision CAT II o III'])
-##    n_clave=st.selectbox('N° de Clave',['1','2','3','4'])
-##    pr_shi=st.selectbox('Ref. SHI',['RWY - Operación','Punto Medio','RWY - Extremo'])
-##    Latitud=st.text_input("Latitud Pista Operación")
-##    Longitud=st.text_input("Longitud Pista Operación")
-##    txto=st.write(f" Logitud {Longitud}")
-##    
-##    
-##if __name__ == '__main__':
-##    main()
 import os
 import math
 import pathlib
 import streamlit as st
 from io import BytesIO
-
-
-def generar_archivo_contenido():
-    """
-    Genera el contenido del archivo para descargar.
-    Aquí puedes reemplazar este ejemplo con tu lógica personalizada.
-    """
-    contenido = "Este es un archivo de ejemplo.\nPuedes personalizar el contenido generado."
-    return contenido.encode("utf-8")  # Convertir a bytes
 
 #-------------------------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------------------
@@ -38,8 +15,7 @@ def obtener(longitudFranja,anchuraFranja,
                 pendiente_conica,altura_conica):
 
     global documentoFinalKml, nombreFinal
-    print( "hola aqui estoy")
-    print('llegue aqui ahora')
+
     a=longitudFranja
     b=anchuraFranja
     
@@ -512,7 +488,7 @@ def obtener(longitudFranja,anchuraFranja,
     #**************************************************************************
     # *************************************** RESA ****************************
     #**************************************************************************
-    print("Imprimiendo")
+
    
     # ---------------- Vertices de RESA sobre borde de FRANJA--------------
     vresaderLong1,vresaderLat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'d',ancho_pista)
@@ -687,7 +663,7 @@ def obtener(longitudFranja,anchuraFranja,
     vaprox1Coord=str(vaproxDecToKMLLong1)+','+ str(vaproxDecToKMLLat1)+','+ str(umbral1Elev)
     vaprox3Coord=str(vaproxDecToKMLLong3)+','+ str(vaproxDecToKMLLat3)+','+ str(umbralfinprimerseccion)
    
-    print(f' umbralfinprimerseccion{umbralfinprimerseccion}')
+
  
     bordeAproxPista1D='<Placemark> \n\
                 <description>RWYLD</description> \n\
@@ -930,7 +906,7 @@ def obtener(longitudFranja,anchuraFranja,
 # ------------------------------------------------------------------------------------
 
 ##    print(f' nClave: {nClave}')
-    print(umbral2Elev)
+
     if combo2==1 or combo2==2:
         h_umbral2=umbral2Elev
         hf_pendiente=(distancia_eje*dep_pendiente)/100+h_umbral2
@@ -959,7 +935,7 @@ def obtener(longitudFranja,anchuraFranja,
         pto_5_asc=str(vAs_final_Long1)+','+ str(vAs_final_Lat1)+','+ str(hf_pendiente2)
         pto_6_asc=str(vAs_final_Long2)+','+ str(vAs_final_Lat2)+','+ str(hf_pendiente2)
         ptos_area_ASC= pto_1_asc+'\n'+pto_2_asc+'\n'+pto_4_asc+'\n'+pto_6_asc+'\n'+pto_5_asc+'\n'+pto_3_asc+'\n'+pto_1_asc
-    print(f"aqui estoy pto {ptos_area_ASC}")
+
         # Area de ASCENSO en despegue
 
 
@@ -993,13 +969,13 @@ def obtener(longitudFranja,anchuraFranja,
     hi_radio
     if var==0:
         ARP=umbral1Elev
-##        print(f' ARP:{ARP}')
+
     elif var==1:
         ARP=umbral2Elev
-##        print(f' ARP:{ARP}')
+
     elif var==2:
         ARP=(umbral2Elev+umbral1Elev)/2
-##        print(f' ARP:{ARP}')      
+    
     #*******************************************************************************************
     #*********************************** SUPERFICIE TRANSICION*************************
     #*******************************************************************************************
@@ -1038,13 +1014,7 @@ def obtener(longitudFranja,anchuraFranja,
         #En linea de franja 2 Extremo
         tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja)
         tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja)
-##        print(f' verticeProlongacionPistaLong1: {verticeProlongacionPistaLong1} \n verticeProlongacionPistaLat1: {verticeProlongacionPistaLat1}')
-##        print(f' tran_lateral_franjad_Long2: {tran_lateral_franjad_Long2} \n tran_lateral_franjad_Lat2: {tran_lateral_franjad_Lat2}')
-##        print(f' tran_lateral_franjai_Long2: {tran_lateral_franjai_Long2} \n tran_lateral_franjai_Lat2: {tran_lateral_franjai_Lat2}')
-##        print(f' tran_lateral_franjad_Long1: {tran_lateral_franjad_Long1} \n tran_lateral_franjad_Lat1: {tran_lateral_franjad_Lat1}')
-##        print(f' tran_lateral_franjai_Long1: {tran_lateral_franjai_Long1} \n tran_lateral_franjai_Lat1: {tran_lateral_franjai_Lat1}')
-##        print(f' tran_laterald_Long1: {tran_laterald_Long1} \n tran_laterald_Lat1: {tran_laterald_Lat1}')        
-##        print(f' tran_laterali_Long1: {tran_laterali_Long1} \n tran_laterali_Lat1: {tran_laterali_Lat1}')
+
         
     elif dop>distprimer:
         doperacion=dop
@@ -1071,13 +1041,6 @@ def obtener(longitudFranja,anchuraFranja,
         #En linea de franja 2 Extremo
         tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja)
         tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja)
-##        print(f' tran_lateral_franjad_Long2: {tran_lateral_franjad_Long2} \n tran_lateral_franjad_Lat2: {tran_lateral_franjad_Lat2}')
-##        print(f' tran_lateral_franjai_Long2: {tran_lateral_franjai_Long2} \n tran_lateral_franjai_Lat2: {tran_lateral_franjai_Lat2}')
-##        print(f' tran_lateral_franjad_Long1: {tran_lateral_franjad_Long1} \n tran_lateral_franjad_Lat1: {tran_lateral_franjad_Lat1}')
-##        print(f' tran_lateral_franjai_Long1: {tran_lateral_franjai_Long1} \n tran_lateral_franjai_Lat1: {tran_lateral_franjai_Lat1}')
-##        print(f' tran_lateral2d_Long1: {tran_lateral2d_Long1} \n tran_lateral2d_Lat1: {tran_lateral2d_Lat1}')        
-##        print(f' tran_lateral2i_Long1: {tran_lateral2i_Long1} \n tran_lateral2i_Lat1: {tran_lateral2i_Lat1}') 
-   
 # ------------------------------------------------------------------------------------
 # ******************   CONversion de UTM a DeCimales **************
 # ------------------------------------------------------------------------------------
@@ -1134,15 +1097,6 @@ def obtener(longitudFranja,anchuraFranja,
     pto_asc1=str(dec_asc_Long1)+','+str(dec_asc_Lat1)+','+str(elev45)
     pto_asc2=str(dec_asc_Long2)+','+str(dec_asc_Lat2)+','+str(elev45)
 
-##    #Corrimiento de puntos para esconder la linea de SHI
-##    pto_asc_pasado_Long1,pto_asc_pasado_Lat1=verticesLibre2(asc_Long1,asc_Lat1,60)
-##    pto_asc_pasado_Long2,pto_asc_pasado_Lat2=verticesLibre2(asc_Long2,asc_Lat2,60)
-##
-##    ascp_Long1,ascp_Lat1=convertir_utm_dec(pto_asc_pasado_Long1,pto_asc_pasado_Lat1,hmf,huso)
-##    ascp_Long2,ascp_Lat2=convertir_utm_dec(pto_asc_pasado_Long2,pto_asc_pasado_Lat2,hmf,huso)
-##
-##    pto_asc1p=str(ascp_Long1)+','+str(ascp_Lat1)+','+str(elev45)
-##    pto_asc2p=str(ascp_Long2)+','+str(ascp_Lat2)+','+str(elev45)
 
     #Puntos internos para La SUPERFICIE HORIZONTAL INTERNA
     ptos_internos_SHI=pto_1_tran +'\n'+pto_2_tran +'\n'+pto_3_tran +'\n'+pto_interno_asc1+'\n'+pto_asc1+'\n'+pto_asc2+'\n'+pto_interno_asc2+'\n'+pto_6_tran+'\n'+pto_5_tran+'\n'+pto_4_tran+'\n'+pto_1_tran
@@ -1296,7 +1250,7 @@ def obtener(longitudFranja,anchuraFranja,
                 p_folder_circ31=p_folder_circ21.replace("'","")
                
         elif mpendiente>0: # Listo aplicado a punta del Este 
-            print(f' P2Long>P1Long || pendiente >0')
+
             azimut1=90-azimut
             ang_cir_der1=90
             ang_cir_der2=-90
@@ -1324,7 +1278,7 @@ def obtener(longitudFranja,anchuraFranja,
 
     # Area Superficie Horizontal Interna 
     Sup_HI=p_folder_circ3+' '+p_folder_circ31+' '+p_folder_circ3[0:43]
-    print('01')
+
              
 ##    SHI='<Placemark> \n\
 ##        <description>RWYLD</description> \n\
@@ -1505,7 +1459,7 @@ def obtener(longitudFranja,anchuraFranja,
     cir_der = []
     cir_der1 = []
 
-    print('cre')
+
 
     if P1Long > P2Long:
         mpendiente = (P2Lat - P1Lat) / (P2Long - P1Long)
@@ -1601,7 +1555,7 @@ def obtener(longitudFranja,anchuraFranja,
     # Concatenar las variables si es necesario para generar la variable final
     Sup_C = f"{c_folder_circ} {c_folder_circ1} {c_folder_circ[:23]}"
 
-    #print('creación completa')                   
+                  
 
 
 # Area de Aproximacion de  pista
@@ -1663,100 +1617,16 @@ def obtener(longitudFranja,anchuraFranja,
     propDocumento='<Document>\n'+nombreArchivo+'\n'+cuerpokml+'</Document>'
     cabezakml='<?xml version="1.0" encoding="UTF-8"?> \n<kml xmlns="http://www.opengis.net/kml/2.2">\n'+propDocumento
    
-##    if os.path.exists('Resultados\\'):
-##        pass
-##    else:
-##        os.mkdir('Resultados\\')
-##        pass
-####           
-##    if os.path.exists('Resultados\\'+nombreaerop+nombrepista):
-##        pass
-##    else:
-##        os.mkdir('Resultados\\'+nombreaerop+nombrepista)
-##        pass
-##           
-##    os.path.exists('Resultados\\'+nombreaerop+nombrepista)
-##    f=open('Resultados\\'+nombreaerop+nombrepista+'\\'+nombreaerop+nombrepista+'.txt','w')
    
     nombreArchivo='<name>'+ nombreaerop+nombrepista +'</name>'
     propDocumento='<Document>\n'+nombreArchivo+'\n'+cuerpokml+'</Document>'
     cabezakml='<?xml version="1.0" encoding="UTF-8"?> \n <kml xmlns="http://www.opengis.net/kml/2.2">\n'+propDocumento
     documentoFinalKml=cabezakml+'\n</kml>'
-##    f.write(str((documentoFinalKml)))
-##    f.close()
-##    print('creacion')
-    
 
-##    nombreAr='Resultados\\'+nombreaerop+nombrepista+'\\'+nombreaerop+nombrepista+'.txt'
-##    renombrado='Resultados\\'+nombreaerop+nombrepista+'\\'+nombreaerop+nombrepista+'.kml'
-##    os.rename(nombreAr,renombrado)
-##    print("Se guardo con Exito")
-
-    #cambiarNombre.destroy()
     
     nombreFinal=nombreaerop+nombrepista
-    print(f" nombrefinal: {nombreFinal}")
     return documentoFinalKml, nombreFinal
-###*********************************** INFORME ***********************************************
-###*******************************************************************************************
-##    valin=var  
-####        print(f" valin {valin}")
-##    if valin==0:
-##        shi_mx='THR Aprox'
-##    if valin==1:
-##        shi_mx='THR Extremo'
-##    elif valin==2:
-##        shi_mx='Punto Medio'
-##
-##    tap=combo1
-##    
-##
-##    base_informe='''
-##                        
-##**************************************************************
-##*                        INFORME                             *
-##**************************************************************
-##      Tipo de Aproximacion: '''+tap+'''
-##*  _______________________________________________________   *
-##* |         -->>          '''+nombrepista+'''         -->>              |  *
-##  |   Sentido Operación             Sentido Operación     |  
-##* |   ==                                               == |  *
-##* |   ==     __   ___  ___   ___   ___   ___   __      == |  *
-##* |   ==                                               == |  *
-##* |_______________________________________________________|  *
-##*                                                            *
-##*                                                            *
-##     Aeropuerto: '''+nombreaerop +'''                       
-##*                                                            *
-##*    --- Coordenadas de Umbrales (Geográficas Dec.) ---      *
-##*    Aproximación                                            *
-##      Latitud:   '''+txt_lat1 + '''°                   
-##      Longitud:  '''+txt_long1+ '''°                   
-##      Elevación: '''+txt_elev1+'''m                    
-##*                                                            *
-##*    Extremo                                                 *
-##      Latitud:   '''+txt_lat2   +'''°                  
-##      Longitud:  '''+txt_long2  +'''°                  
-##      Elevación: '''+txt_elev2+'''m                    
-##*                                                            *
-##*     ------ Referencia Sup. Horizontal Interna ------       *
-##      Referencia: ''' +shi_mx+ '''                           
-##*                                                            *
-##      Ancho de Pista: '''+txt_anchoPista +'''m
-##*                                                            *
-##*                                                            *
-##      N° Clave: '''+ combo2 +'''                       
-##*                                                            *
-##**************************************************************  '''
-##
-##
-##
-##
-##
-##    f=open('Resultados\\'+nombreFinal+'\\'+nombreFinal+'.txt','w')
-##    print(f)
-##    f.write(str((documentoFinalKml)))
-##    f.close()
+
 
 #*******************************************************************************************
 #*********************************** FIN DE INFORME*****************************************
@@ -1787,13 +1657,13 @@ def crear_genslo(nombre_ad,Pista,Longitud_OP,Latitud_OP,Elevacion_OP,Longitud_EX
 
     # ************************** GRUPO DE COMBOBOX  ***********************************
     # 1ro Hermisferio
-    print(txt_long1)
+
     if float(txt_long1)>0:
         combo3='N'
     else:
         combo3='S'
         
-    print(combo3)
+
     # 2do - T. Aproximacion
     if t_aproximacion=='Visual':
         combo1='Visual'
@@ -1918,7 +1788,6 @@ def crear_genslo(nombre_ad,Pista,Longitud_OP,Latitud_OP,Elevacion_OP,Longitud_EX
                     14.3,
                     5,100)
     elif tipoAprox=='Precision CAT II o III':
-        print('estoy')
         if nClave=='1':
             print("No hay diseño para n° clave 1 y Aproximación de precisión Cat. II o III")
         elif nClave=='2':
@@ -1931,7 +1800,6 @@ def crear_genslo(nombre_ad,Pista,Longitud_OP,Latitud_OP,Elevacion_OP,Longitud_EX
                     14.3,
                     5,100)
         elif nClave=='4':
-            print('cat4')
             obtener(60,140,
                     280,15,3000,2,3600,2.5,8400,
                     4000,45,
@@ -1950,12 +1818,12 @@ def main():
     # Selecciones y entradas
     nombre_ad=st.text_input("Nombre de Aeródromo")
     Pista=st.text_input("Pista Operacion")
-    Latitud_OP=st.text_input("Latitud - Operación [Grados Decimales]")
-    Longitud_OP=st.text_input("Longitud - Operación [Grados Decimales]")
+    Latitud_OP=st.text_input("Latitud - Operación [Grados Decimales sin °]")
+    Longitud_OP=st.text_input("Longitud - Operación [Grados Decimales sin °]")
     Elevacion_OP=st.text_input("Elevación - Operación [m]")
     
-    Latitud_EXT=st.text_input("Latitud - Extremo [Grados Decimales]")
-    Longitud_EXT=st.text_input("Longitud - Extremo [Grados Decimales]")
+    Latitud_EXT=st.text_input("Latitud - Extremo [Grados Decimales sin °]")
+    Longitud_EXT=st.text_input("Longitud - Extremo [Grados Decimales sin °]")
     Elevacion_EXT=st.text_input("Elevación - Extremo [m]")
 
     ancho_Pista=st.text_input("Ancho de Pista [m]")
