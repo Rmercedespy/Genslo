@@ -2,7 +2,7 @@ import os
 import math
 import pathlib
 import streamlit as st
-from io import BytesIO
+#from io import BytesIO
 
 #-------------------------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------------------
@@ -135,7 +135,7 @@ def obtener(longitudFranja,anchuraFranja,
     #***** Conversor de Geograficas a UTM ********
     #*****************************************************
     def convertir_dec_utm(thrLong,thrLat,select_hmf):
-        thrLong
+        #thrLong
         a=6378137.0 #semieje mayor
         b=6356752.31414#245 #semieje menor
         c=(a**2)/b #radio polar de curvatura
@@ -966,7 +966,7 @@ def obtener(longitudFranja,anchuraFranja,
     #======================================================================================================================================
     # Estas lineas de ARP sirven para la SHI y para la superficie de TRANSICION antes estaban solo en la SHI solamente
     #======================================================================================================================================
-    hi_radio
+    #hi_radio
     if var==0:
         ARP=umbral1Elev
 
@@ -979,7 +979,7 @@ def obtener(longitudFranja,anchuraFranja,
     #*******************************************************************************************
     #*********************************** SUPERFICIE TRANSICION*************************
     #*******************************************************************************************
-    tran_pendiente
+    #tran_pendiente
     
     h_op=umbral1Elev
 
@@ -987,7 +987,7 @@ def obtener(longitudFranja,anchuraFranja,
     
 ##    print(f' hop_franja: {hop_franja}')
     dop=hop_franja/(mprim/100)
-##    print(f' dop: {dop}')
+    print(f' dop: {dop}')
 
     if dop<=distprimer:
         doperacion=dop
@@ -1154,7 +1154,7 @@ def obtener(longitudFranja,anchuraFranja,
     # --------------   SEMI- CIRCUNFERENCIA PUNTO 2 (DERECHA)  ------------------
     
     hi_altura_final=hi_altura+ARP
-##    print(f' hi_altura_final: {hi_altura_final}')
+    print(f' hi_altura_final: {hi_altura_final}')
     cir_der=[]
     cir_der1=[]
     #cir1r=[]
@@ -1277,7 +1277,7 @@ def obtener(longitudFranja,anchuraFranja,
                
 
     # Area Superficie Horizontal Interna 
-    Sup_HI=p_folder_circ3+' '+p_folder_circ31+' '+p_folder_circ3[0:43]
+    Sup_HI=p_folder_circ3+' '+p_folder_circ31+' '+p_folder_circ3[0:25]
 
              
 ##    SHI='<Placemark> \n\
@@ -1453,7 +1453,7 @@ def obtener(longitudFranja,anchuraFranja,
 ##                c_folder_circ1=str(cir_der1)[1:-1]
 ##                c_folder_circ21=c_folder_circ1.replace("',","")
 ##                c_folder_circ31=c_folder_circ21.replace("'","")
-    c_pendiente, c_altura
+    #c_pendiente, c_altura
     hi_altura_final = hi_altura + ARP
     c_hi_radio = hi_radio + (100 / c_pendiente) * c_altura
     cir_der = []
@@ -1541,7 +1541,7 @@ def obtener(longitudFranja,anchuraFranja,
                 cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
                 cir_der.append(cc)
 
-            for v in range(ang_cir_derc3, ang_cir_derc4, 1):
+            for v in range(ang_cir_derc3, ang_cir_derc4, 1):    
                 cc1 = P1Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
                 cc2 = P1Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
                 cc3 = hi_altura_final + c_altura
@@ -1553,7 +1553,7 @@ def obtener(longitudFranja,anchuraFranja,
     c_folder_circ1 = ",".join(cir_der1)
 
     # Concatenar las variables si es necesario para generar la variable final
-    Sup_C = f"{c_folder_circ} {c_folder_circ1} {c_folder_circ[:23]}"
+    Sup_C = f"{c_folder_circ} {c_folder_circ1} {c_folder_circ[:25]}"
 
                   
 
@@ -1818,15 +1818,15 @@ def main():
     # Selecciones y entradas
     nombre_ad=st.text_input("Nombre de Aeródromo")
     Pista=st.text_input("Pista Operacion")
-    Latitud_OP=st.text_input("Latitud - Operación [Grados Decimales sin °]")
-    Longitud_OP=st.text_input("Longitud - Operación [Grados Decimales sin °]")
+    Latitud_OP=st.text_input("Latitud - Operación [Grados Decimales sin °]", value="")
+    Longitud_OP=st.text_input("Longitud - Operación [Grados Decimales sin °]", value="")
     Elevacion_OP=st.text_input("Elevación - Operación [m]")
     
-    Latitud_EXT=st.text_input("Latitud - Extremo [Grados Decimales sin °]")
-    Longitud_EXT=st.text_input("Longitud - Extremo [Grados Decimales sin °]")
-    Elevacion_EXT=st.text_input("Elevación - Extremo [m]")
+    Latitud_EXT=st.text_input("Latitud - Extremo [Grados Decimales sin °]", value="")
+    Longitud_EXT=st.text_input("Longitud - Extremo [Grados Decimales sin °]", value="")
+    Elevacion_EXT=st.text_input("Elevación - Extremo [m]", value="")
 
-    ancho_Pista=st.text_input("Ancho de Pista [m]")
+    ancho_Pista=st.text_input("Ancho de Pista [m]", value="")
     
     t_aproximacion = st.selectbox('Tipo de Aproximación',
                            ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
@@ -1850,7 +1850,7 @@ def main():
             mime="text/plain",
              key="descargar_kml"
         )
-        return 
+ 
 
     base_informe='''
     **************************************************************
