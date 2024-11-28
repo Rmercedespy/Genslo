@@ -1689,27 +1689,34 @@ def main():
     st.title("GENSLO beta v1.0")
     st.header("Superficies Limitadoras de Obstáculos - Según ANEXO 14 - OACI")
     st.subheader("Grupo de Transporte Aéreo (GTA) - UNLP")
+    st.markdown("""
+    <div style="background-color: #f8d7da; padding: 10px; border-radius: 5px; border: 1px solid #f5c6cb;">
+        <strong>AVISO DE SEGURIDAD:</strong> Esta herramienta está elaborada para uso de Planificación y no como uso de Proyecto.
+    </div>
+""", unsafe_allow_html=True)
 
+    # Aquí sigue el resto de la aplicación
+   
 
     # Mostrar lo que escribió el usuario
     st.divider()
     st.markdown("__Datos del Aeródromo__")
     # Primera línea: Texto y cuadro de entrada
     nombre_ad=st.text_input("Nombre de Aeródromo",placeholder="Nombre sin espacios, ex: SABE, AEP, Aeroparque")
-    Pista=st.text_input("Pista Operación",placeholder="Indique el Numero correspondiente al THR de Operación, ex.: 19")
+    Pista=st.text_input("Pista Seleccionada ",placeholder="Indique el Numero correspondiente al THR de Pista, ex.: 19")
     ancho_Pista=st.text_input("Ancho de Pista [m]", value="")
     st.divider()
-    st.markdown("__Coordenadas De Umbral de Operación__")
+    st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
     Latitud_OP=st.text_input(f"Latitud - THR {Pista}  [Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
     Longitud_OP=st.text_input(f"Longitud - THR {Pista} [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
     Elevacion_OP=st.text_input(f"Elevación - THR {Pista} [m]",value="")
     # Selecciones y entradas
 
     st.divider()
-    st.markdown("__Coordenadas del Extremo al Umbral de Operación__")    
-    Latitud_EXT=st.text_input(f"Latitud - Extremo de THR {Pista}[Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
-    Longitud_EXT=st.text_input(f"Longitud - Extremo de THR {Pista} [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
-    Elevacion_EXT=st.text_input(f"Elevación - Extremo de THR {Pista} [m]", value="")
+    st.markdown("Coordenadas del Extremo de Pista")    
+    Latitud_EXT=st.text_input(f"Latitud - Extremo de Pista[Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
+    Longitud_EXT=st.text_input(f"Longitud - Extremo de Pista [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
+    Elevacion_EXT=st.text_input(f"Elevación - Extremo de Pista [m]", value="")
     st.divider()
     
     st.markdown("__Datos Operativos__")
