@@ -1691,30 +1691,6 @@ def main():
     st.subheader("Grupo de Transporte Aéreo (GTA) - UNLP")
 
 
-
-##    # Fila 1
-##    with st.container():
-##        st.header("Pista Seleccionada")
-##        st.write("Contenido de la primera fila.")
-##
-##    # Espacio entre filas
-##    st.write("---")
-##
-##    # Fila 2
-##    with st.container():
-##        st.header("Fila 2: Análisis")
-##        st.write("Contenido de la segunda fila.")
-##
-##    # Espacio entre filas
-##    st.write("---")
-##
-##    # Fila 3
-##    with st.container():
-##        st.header("Fila 3: Resultados")
-##        st.write("Contenido de la tercera fila.")
-
-
-
     # Mostrar lo que escribió el usuario
     st.divider()
     st.markdown("__Datos del Aeródromo__")
