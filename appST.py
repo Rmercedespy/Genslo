@@ -1327,133 +1327,7 @@ def obtener(longitudFranja,anchuraFranja,
     #*******************************************************************************************
 
     # --------------   SEMI- CIRCUNFERENCIA PUNTO 2 (DERECHA)  ------------------
-##    c_pendiente,c_altura
-##    hi_altura_final=hi_altura+ARP
-##    c_hi_radio=hi_radio+(100/c_pendiente)*c_altura
-##    cir_der=[]
-##    cir_der1=[]
-##    #cir1r=[]
-##    print('cre')
-##    if P1Long>P2Long:
-##        mpendiente=(P2Lat-P1Lat)/(P2Long-P1Long)
-##        if mpendiente<0:# Listo probado en P Este 
-####            print(f' P2Long<P1Long || pendiente <0')
-####            print(azimut)
-####            print(azimut-180)
-##            azimut1=(azimut-180)
-##            ang_cir_derc1=90
-##            ang_cir_derc2=-90
-##            ang_cir_derc3=90
-##            ang_cir_derc4=270
-##            for v in range(ang_cir_derc2,ang_cir_derc1,1):
-##                cc1=(P2Lat+c_hi_radio*math.cos(math.radians(azimut1+v)))
-##                cc2=(P2Long+c_hi_radio*math.sin(math.radians(azimut1+v)))
-##                cc3=(hi_altura_final+c_altura)
-##                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
-##                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
-##                cir_der.append(cc)
-##                c_folder_circ=str(cir_der)[1:-1]
-##                c_folder_circ2=c_folder_circ.replace("',","")
-##                c_folder_circ3=c_folder_circ2.replace("'","")
-##            for v in range(ang_cir_derc3,ang_cir_derc4,1):
-##                cc1=(P1Lat+c_hi_radio*math.cos(math.radians(azimut1+v)))
-##                cc2=(P1Long+c_hi_radio*math.sin(math.radians(azimut1+v)))
-##                cc3=(hi_altura_final+c_altura)
-##                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
-##                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
-##                #print(c)
-##                cir_der1.append(cc)
-##                c_folder_circ1=str(cir_der1)[1:-1]
-##                c_folder_circ21=c_folder_circ1.replace("',","")
-##                c_folder_circ31=c_folder_circ21.replace("'","")
-####                print(f' aqui-')
-##        elif mpendiente>0: # Listo probado en P Este 
-####            print(f' P2Long<P1Long || pendiente >0')
-##            azimut1=-1*(azimut-90)
-##            ang_cir_derc1=90
-##            ang_cir_derc2=270
-##            ang_cir_derc3=-90
-##            ang_cir_derc4=90
-####            print(f' aqui+')
-##            for v in range(ang_cir_derc1,ang_cir_derc2,1):
-##                cc1=P2Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
-##                cc2=P2Long+c_hi_radio*math.cos(math.radians(azimut1+v))
-##                cc3=(hi_altura_final+c_altura)
-##                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
-##                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
-##                cir_der.append(cc)
-##                c_folder_circ=str(cir_der)[1:-1]
-##                c_folder_circ2=c_folder_circ.replace("',","")
-##                c_folder_circ3=c_folder_circ2.replace("'","")
-##            for v in range(ang_cir_derc3,ang_cir_derc4,1):
-##                cc1=P1Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
-##                cc2=P1Long+c_hi_radio*math.cos(math.radians(azimut1+v))
-##                cc3=(hi_altura_final+c_altura)
-##                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
-##                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
-##                cir_der1.append(cc)
-##                c_folder_circ1=str(cir_der1)[1:-1]
-##                c_folder_circ21=c_folder_circ1.replace("',","")
-##                c_folder_circ31=c_folder_circ21.replace("'","")
-##        print('creacion')
-##    elif P2Long>P1Long: # listo aplicado en punta del Este
-##        mpendiente=(P1Lat-P2Lat)/(P1Long-P2Long)
-##        if mpendiente<0:
-####            print(f' P2Long>P1Long || pendiente <0')
-##            azimut1=-1*(azimut-90)
-##            ang_cir_derc1=-90
-##            ang_cir_derc2=90
-##            ang_cir_derc3=90
-##            ang_cir_derc4=270
-##            for v in range(ang_cir_derc1,ang_cir_derc2,1):
-##                cc1=P2Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
-##                cc2=P2Long+c_hi_radio*math.cos(math.radians(azimut1+v))
-##                cc3=(hi_altura_final+c_altura)
-##                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
-##                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
-##                cir_der.append(cc)
-##                c_folder_circ=str(cir_der)[1:-1]
-##                c_folder_circ2=c_folder_circ.replace("',","")
-##                c_folder_circ3=c_folder_circ2.replace("'","")
-##            for v in range(ang_cir_derc3,ang_cir_derc4,1):
-##                cc1=P1Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
-##                cc2=P1Long+c_hi_radio*math.cos(math.radians(azimut1+v))
-##                cc3=(hi_altura_final+c_altura)
-##                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
-##                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
-##                cir_der1.append(cc)
-##                c_folder_circ1=str(cir_der1)[1:-1]
-##                c_folder_circ21=c_folder_circ1.replace("',","")
-##                c_folder_circ31=c_folder_circ21.replace("'","")
-##               
-##        elif mpendiente>0: # Listo aplicado a punta del Este 
-####            print(f' P2Long>P1Long || pendiente >0')
-##            azimut1=90-azimut
-##            ang_cir_derc1=90
-##            ang_cir_derc2=-90
-##            ang_cir_derc3=90
-##            ang_cir_derc4=270
-##            for v in range(ang_cir_derc2,ang_cir_derc1,1):
-##                cc1=P2Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
-##                cc2=P2Long+c_hi_radio*math.cos(math.radians(azimut1+v))
-##                cc3=(hi_altura_final+c_altura)
-##                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
-##                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
-##                cir_der.append(cc)
-##                c_folder_circ=str(cir_der)[1:-1]
-##                c_folder_circ2=c_folder_circ.replace("',","")
-##                c_folder_circ3=c_folder_circ2.replace("'","")
-##            for v in range(ang_cir_derc3,ang_cir_derc4,1):
-##                cc1=P1Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
-##                cc2=P1Long+c_hi_radio*math.cos(math.radians(azimut1+v))
-##                cc3=(hi_altura_final+c_altura)
-##                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
-##                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
-##                cir_der1.append(cc)# append sirve para añADIR elemento al final de la lista 
-##                c_folder_circ1=str(cir_der1)[1:-1]
-##                c_folder_circ21=c_folder_circ1.replace("',","")
-##                c_folder_circ31=c_folder_circ21.replace("'","")
-    #c_pendiente, c_altura
+
     hi_altura_final = hi_altura + ARP
     c_hi_radio = hi_radio + (100 / c_pendiente) * c_altura
     cir_der = []
@@ -1812,29 +1686,64 @@ def crear_genslo(nombre_ad,Pista,Longitud_OP,Latitud_OP,Elevacion_OP,Longitud_EX
 #-------------------------------------------------------------------------------------------------
 
 def main():
-    st.title("GENSLO v1.0")
-    st.header("Superficies Limitadoras de Obstáculos - GTA UNLP")
+    st.title("GENSLO beta v1.0")
+    st.header("Superficies Limitadoras de Obstáculos - Según ANEXO 14 - OACI")
+    st.subheader("Grupo de Transporte Aéreo (GTA) - UNLP")
 
-    # Selecciones y entradas
-    nombre_ad=st.text_input("Nombre de Aeródromo")
-    Pista=st.text_input("Pista Operacion")
-    Latitud_OP=st.text_input("Latitud - Operación [Grados Decimales sin °]", value="")
-    Longitud_OP=st.text_input("Longitud - Operación [Grados Decimales sin °]", value="")
-    Elevacion_OP=st.text_input("Elevación - Operación [m]")
-    
-    Latitud_EXT=st.text_input("Latitud - Extremo [Grados Decimales sin °]", value="")
-    Longitud_EXT=st.text_input("Longitud - Extremo [Grados Decimales sin °]", value="")
-    Elevacion_EXT=st.text_input("Elevación - Extremo [m]", value="")
 
+
+##    # Fila 1
+##    with st.container():
+##        st.header("Pista Seleccionada")
+##        st.write("Contenido de la primera fila.")
+##
+##    # Espacio entre filas
+##    st.write("---")
+##
+##    # Fila 2
+##    with st.container():
+##        st.header("Fila 2: Análisis")
+##        st.write("Contenido de la segunda fila.")
+##
+##    # Espacio entre filas
+##    st.write("---")
+##
+##    # Fila 3
+##    with st.container():
+##        st.header("Fila 3: Resultados")
+##        st.write("Contenido de la tercera fila.")
+
+
+
+    # Mostrar lo que escribió el usuario
+    st.divider()
+    st.markdown("__Datos del Aeródromo__")
+    # Primera línea: Texto y cuadro de entrada
+    nombre_ad=st.text_input("Nombre de Aeródromo",placeholder="Nombre sin espacios, ex: SABE, AEP, Aeroparque")
+    Pista=st.text_input("Pista Operación",placeholder="Indique el Numero correspondiente al THR de Operación, ex.: 19")
     ancho_Pista=st.text_input("Ancho de Pista [m]", value="")
+    st.divider()
+    st.markdown("__Coordenadas De Umbral de Operación__")
+    Latitud_OP=st.text_input(f"Latitud - THR {Pista}  [Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
+    Longitud_OP=st.text_input(f"Longitud - THR {Pista} [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
+    Elevacion_OP=st.text_input(f"Elevación - THR {Pista} [m]",value="")
+    # Selecciones y entradas
+
+    st.divider()
+    st.markdown("__Coordenadas del Extremo al Umbral de Operación__")    
+    Latitud_EXT=st.text_input(f"Latitud - Extremo de THR {Pista}[Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
+    Longitud_EXT=st.text_input(f"Longitud - Extremo de THR {Pista} [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
+    Elevacion_EXT=st.text_input(f"Elevación - Extremo de THR {Pista} [m]", value="")
+    st.divider()
     
+    st.markdown("__Datos Operativos__")
     t_aproximacion = st.selectbox('Tipo de Aproximación',
                            ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
     
     n_clave = st.selectbox('N° de Clave', ['1', '2', '3', '4'])
-    ref_SHI = st.selectbox('Ref. SHI', ['RWY - Operación', 'Punto Medio', 'RWY - Extremo'])
-
-    
+    ref_SHI = st.selectbox('Elevación de Referencia de la SHI.', ['RWY - Operación', 'Punto Medio', 'RWY - Extremo'])
+    st.divider()
+#-------------------------------------------------------------------------------------------------------    
     # Botón para generar el archivo
     if st.button("Generar .kml", key="boton_kml"):
      
