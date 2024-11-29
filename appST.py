@@ -987,7 +987,7 @@ def obtener(longitudFranja,anchuraFranja,
     
 ##    print(f' hop_franja: {hop_franja}')
     dop=hop_franja/(mprim/100)
-    print(f' dop: {dop}')
+    #print(f' dop: {dop}')
 
     if dop<=distprimer:
         doperacion=dop
@@ -1154,7 +1154,7 @@ def obtener(longitudFranja,anchuraFranja,
     # --------------   SEMI- CIRCUNFERENCIA PUNTO 2 (DERECHA)  ------------------
     
     hi_altura_final=hi_altura+ARP
-    print(f' hi_altura_final: {hi_altura_final}')
+    #print(f' hi_altura_final: {hi_altura_final}')
     cir_der=[]
     cir_der1=[]
     #cir1r=[]
@@ -1333,101 +1333,223 @@ def obtener(longitudFranja,anchuraFranja,
     cir_der = []
     cir_der1 = []
 
-
-
-    if P1Long > P2Long:
-        mpendiente = (P2Lat - P1Lat) / (P2Long - P1Long)
-        if mpendiente < 0:  # Probado en Punta del Este
-            azimut1 = azimut - 180
-            ang_cir_derc1, ang_cir_derc2 = 90, -90
-            ang_cir_derc3, ang_cir_derc4 = 90, 270
-            
-            for v in range(ang_cir_derc2, ang_cir_derc1, 1):
-                cc1 = P2Lat + c_hi_radio * math.cos(math.radians(azimut1 + v))
-                cc2 = P2Long + c_hi_radio * math.sin(math.radians(azimut1 + v))
-                cc3 = hi_altura_final + c_altura
-                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
-                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+    if P1Long>P2Long:
+        mpendiente=(P2Lat-P1Lat)/(P2Long-P1Long)
+        if mpendiente<0:# Listo probado en P Este 
+##            print(f' P2Long<P1Long || pendiente <0')
+##            print(azimut)
+##            print(azimut-180)
+            azimut1=(azimut-180)
+            ang_cir_derc1=90
+            ang_cir_derc2=-90
+            ang_cir_derc3=90
+            ang_cir_derc4=270
+            for v in range(ang_cir_derc2,ang_cir_derc1,1):
+                cc1=(P2Lat+c_hi_radio*math.cos(math.radians(azimut1+v)))
+                cc2=(P2Long+c_hi_radio*math.sin(math.radians(azimut1+v)))
+                cc3=(hi_altura_final+c_altura)
+                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
+                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der.append(cc)
-            
-            for v in range(ang_cir_derc3, ang_cir_derc4, 1):
-                cc1 = P1Lat + c_hi_radio * math.cos(math.radians(azimut1 + v))
-                cc2 = P1Long + c_hi_radio * math.sin(math.radians(azimut1 + v))
-                cc3 = hi_altura_final + c_altura
-                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
-                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+                c_folder_circ=str(cir_der)[1:-1]
+                c_folder_circ2=c_folder_circ.replace("',","")
+                c_folder_circ3=c_folder_circ2.replace("'","")
+            for v in range(ang_cir_derc3,ang_cir_derc4,1):
+                cc1=(P1Lat+c_hi_radio*math.cos(math.radians(azimut1+v)))
+                cc2=(P1Long+c_hi_radio*math.sin(math.radians(azimut1+v)))
+                cc3=(hi_altura_final+c_altura)
+                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
+                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
+                #print(c)
                 cir_der1.append(cc)
-
-        elif mpendiente > 0:  # Probado en Punta del Este
-            azimut1 = -(azimut - 90)
-            ang_cir_derc1, ang_cir_derc2 = 90, 270
-            ang_cir_derc3, ang_cir_derc4 = -90, 90
-
-            for v in range(ang_cir_derc1, ang_cir_derc2, 1):
-                cc1 = P2Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
-                cc2 = P2Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
-                cc3 = hi_altura_final + c_altura
-                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
-                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+                c_folder_circ1=str(cir_der1)[1:-1]
+                c_folder_circ21=c_folder_circ1.replace("',","")
+                c_folder_circ31=c_folder_circ21.replace("'","")
+##                print(f' aqui-')
+        elif mpendiente>0: # Listo probado en P Este 
+##            print(f' P2Long<P1Long || pendiente >0')
+            azimut1=-1*(azimut-90)
+            ang_cir_derc1=90
+            ang_cir_derc2=270
+            ang_cir_derc3=-90
+            ang_cir_derc4=90
+##            print(f' aqui+')
+            for v in range(ang_cir_derc1,ang_cir_derc2,1):
+                cc1=P2Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
+                cc2=P2Long+c_hi_radio*math.cos(math.radians(azimut1+v))
+                cc3=(hi_altura_final+c_altura)
+                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
+                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der.append(cc)
-
-            for v in range(ang_cir_derc3, ang_cir_derc4, 1):
-                cc1 = P1Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
-                cc2 = P1Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
-                cc3 = hi_altura_final + c_altura
-                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
-                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+                c_folder_circ=str(cir_der)[1:-1]
+                c_folder_circ2=c_folder_circ.replace("',","")
+                c_folder_circ3=c_folder_circ2.replace("'","")
+            for v in range(ang_cir_derc3,ang_cir_derc4,1):
+                cc1=P1Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
+                cc2=P1Long+c_hi_radio*math.cos(math.radians(azimut1+v))
+                cc3=(hi_altura_final+c_altura)
+                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
+                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der1.append(cc)
+                c_folder_circ1=str(cir_der1)[1:-1]
+                c_folder_circ21=c_folder_circ1.replace("',","")
+                c_folder_circ31=c_folder_circ21.replace("'","")
 
-    elif P2Long > P1Long:  # Aplicado en Punta del Este
-        mpendiente = (P1Lat - P2Lat) / (P1Long - P2Long)
-        if mpendiente < 0:
-            azimut1 = -(azimut - 90)
-            ang_cir_derc1, ang_cir_derc2 = -90, 90
-            ang_cir_derc3, ang_cir_derc4 = 90, 270
-
-            for v in range(ang_cir_derc1, ang_cir_derc2, 1):
-                cc1 = P2Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
-                cc2 = P2Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
-                cc3 = hi_altura_final + c_altura
-                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
-                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+    elif P2Long>P1Long: # listo aplicado en punta del Este
+        mpendiente=(P1Lat-P2Lat)/(P1Long-P2Long)
+        if mpendiente<0:
+##            print(f' P2Long>P1Long || pendiente <0')
+            azimut1=-1*(azimut-90)
+            ang_cir_derc1=-90
+            ang_cir_derc2=90
+            ang_cir_derc3=90
+            ang_cir_derc4=270
+            for v in range(ang_cir_derc1,ang_cir_derc2,1):
+                cc1=P2Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
+                cc2=P2Long+c_hi_radio*math.cos(math.radians(azimut1+v))
+                cc3=(hi_altura_final+c_altura)
+                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
+                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der.append(cc)
-
-            for v in range(ang_cir_derc3, ang_cir_derc4, 1):
-                cc1 = P1Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
-                cc2 = P1Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
-                cc3 = hi_altura_final + c_altura
-                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
-                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+                c_folder_circ=str(cir_der)[1:-1]
+                c_folder_circ2=c_folder_circ.replace("',","")
+                c_folder_circ3=c_folder_circ2.replace("'","")
+            for v in range(ang_cir_derc3,ang_cir_derc4,1):
+                cc1=P1Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
+                cc2=P1Long+c_hi_radio*math.cos(math.radians(azimut1+v))
+                cc3=(hi_altura_final+c_altura)
+                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
+                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der1.append(cc)
-
-        elif mpendiente > 0:
-            azimut1 = 90 - azimut
-            ang_cir_derc1, ang_cir_derc2 = -90, 90
-            ang_cir_derc3, ang_cir_derc4 = 90, 270
-
-            for v in range(ang_cir_derc2, ang_cir_derc1, 1):
-                cc1 = P2Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
-                cc2 = P2Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
-                cc3 = hi_altura_final + c_altura
-                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
-                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+                c_folder_circ1=str(cir_der1)[1:-1]
+                c_folder_circ21=c_folder_circ1.replace("',","")
+                c_folder_circ31=c_folder_circ21.replace("'","")
+               
+        elif mpendiente>0: # Listo aplicado a punta del Este 
+##            print(f' P2Long>P1Long || pendiente >0')
+            azimut1=90-azimut
+            ang_cir_derc1=90
+            ang_cir_derc2=-90
+            ang_cir_derc3=90
+            ang_cir_derc4=270
+            for v in range(ang_cir_derc2,ang_cir_derc1,1):
+                cc1=P2Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
+                cc2=P2Long+c_hi_radio*math.cos(math.radians(azimut1+v))
+                cc3=(hi_altura_final+c_altura)
+                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
+                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der.append(cc)
+                c_folder_circ=str(cir_der)[1:-1]
+                c_folder_circ2=c_folder_circ.replace("',","")
+                c_folder_circ3=c_folder_circ2.replace("'","")
+            for v in range(ang_cir_derc3,ang_cir_derc4,1):
+                cc1=P1Lat+c_hi_radio*math.sin(math.radians(azimut1+v))
+                cc2=P1Long+c_hi_radio*math.cos(math.radians(azimut1+v))
+                cc3=(hi_altura_final+c_altura)
+                UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
+                cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
+                cir_der1.append(cc)# append sirve para añADIR elemento al final de la lista 
+                c_folder_circ1=str(cir_der1)[1:-1]
+                c_folder_circ21=c_folder_circ1.replace("',","")
+                c_folder_circ31=c_folder_circ21.replace("'","")
+               
 
-            for v in range(ang_cir_derc3, ang_cir_derc4, 1):    
-                cc1 = P1Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
-                cc2 = P1Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
-                cc3 = hi_altura_final + c_altura
-                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
-                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
-                cir_der1.append(cc)
-    # Crear cadenas finales
-    c_folder_circ = ",".join(cir_der)
-    c_folder_circ1 = ",".join(cir_der1)
+    # Area Superficie Horizontal Interna 
+    Sup_C=c_folder_circ3+' '+c_folder_circ31+' '+c_folder_circ3[0:25]
 
-    # Concatenar las variables si es necesario para generar la variable final
-    Sup_C = f"{c_folder_circ} {c_folder_circ1} {c_folder_circ[:25]}"
+##    if P1Long > P2Long:
+##        mpendiente = (P2Lat - P1Lat) / (P2Long - P1Long)
+##        if mpendiente < 0:  # Probado en Punta del Este
+##            azimut1 = azimut - 180
+##            ang_cir_derc1, ang_cir_derc2 = 90, -90
+##            ang_cir_derc3, ang_cir_derc4 = 90, 270
+##            
+##            for v in range(ang_cir_derc2, ang_cir_derc1, 1):
+##                cc1 = P2Lat + c_hi_radio * math.cos(math.radians(azimut1 + v))
+##                cc2 = P2Long + c_hi_radio * math.sin(math.radians(azimut1 + v))
+##                cc3 = hi_altura_final + c_altura
+##                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
+##                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+##                cir_der.append(cc)
+##            
+##            for v in range(ang_cir_derc3, ang_cir_derc4, 1):
+##                cc1 = P1Lat + c_hi_radio * math.cos(math.radians(azimut1 + v))
+##                cc2 = P1Long + c_hi_radio * math.sin(math.radians(azimut1 + v))
+##                cc3 = hi_altura_final + c_altura
+##                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
+##                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+##                cir_der1.append(cc)
+##
+##        elif mpendiente > 0:  # Probado en Punta del Este
+##            azimut1 = -(azimut - 90)
+##            ang_cir_derc1, ang_cir_derc2 = 90, 270
+##            ang_cir_derc3, ang_cir_derc4 = -90, 90
+##
+##            for v in range(ang_cir_derc1, ang_cir_derc2, 1):
+##                cc1 = P2Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
+##                cc2 = P2Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
+##                cc3 = hi_altura_final + c_altura
+##                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
+##                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+##                cir_der.append(cc)
+##
+##            for v in range(ang_cir_derc3, ang_cir_derc4, 1):
+##                cc1 = P1Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
+##                cc2 = P1Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
+##                cc3 = hi_altura_final + c_altura
+##                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
+##                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+##                cir_der1.append(cc)
+##
+##    elif P2Long > P1Long:  # Aplicado en Punta del Este
+##        mpendiente = (P1Lat - P2Lat) / (P1Long - P2Long)
+##        if mpendiente < 0:
+##            azimut1 = -(azimut - 90)
+##            ang_cir_derc1, ang_cir_derc2 = -90, 90
+##            ang_cir_derc3, ang_cir_derc4 = 90, 270
+##
+##            for v in range(ang_cir_derc1, ang_cir_derc2, 1):
+##                cc1 = P2Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
+##                cc2 = P2Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
+##                cc3 = hi_altura_final + c_altura
+##                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
+##                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+##                cir_der.append(cc)
+##
+##            for v in range(ang_cir_derc3, ang_cir_derc4, 1):
+##                cc1 = P1Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
+##                cc2 = P1Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
+##                cc3 = hi_altura_final + c_altura
+##                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
+##                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+##                cir_der1.append(cc)
+##
+##        elif mpendiente > 0:
+##            azimut1 = 90 - azimut
+##            ang_cir_derc1, ang_cir_derc2 = -90, 90
+##            ang_cir_derc3, ang_cir_derc4 = 90, 270
+##
+##            for v in range(ang_cir_derc2, ang_cir_derc1, 1):
+##                cc1 = P2Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
+##                cc2 = P2Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
+##                cc3 = hi_altura_final + c_altura
+##                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
+##                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+##                cir_der.append(cc)
+##
+##            for v in range(ang_cir_derc3, ang_cir_derc4, 1):    
+##                cc1 = P1Lat + c_hi_radio * math.sin(math.radians(azimut1 + v))
+##                cc2 = P1Long + c_hi_radio * math.cos(math.radians(azimut1 + v))
+##                cc3 = hi_altura_final + c_altura
+##                UTMtoDecLong, UTMtoDecLat = convertir_utm_dec(cc2, cc1, hmf, huso)
+##                cc = f"{UTMtoDecLong},{UTMtoDecLat},{cc3}"
+##                cir_der1.append(cc)
+##    # Crear cadenas finales
+##    c_folder_circ = ",".join(cir_der)
+##    c_folder_circ1 = ",".join(cir_der1)
+##
+##    # Concatenar las variables si es necesario para generar la variable final
+##    Sup_C = f"{c_folder_circ} {c_folder_circ1} {c_folder_circ[:25]}"
 
                   
 
@@ -1685,6 +1807,69 @@ def crear_genslo(nombre_ad,Pista,Longitud_OP,Latitud_OP,Elevacion_OP,Longitud_EX
 #-------------------------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------------------
 
+##def main():
+##    st.title("GENSLO beta v1.0")
+##    st.header("Superficies Limitadoras de Obstáculos - Según ANEXO 14 - OACI")
+##    st.subheader("Grupo de Transporte Aéreo (GTA) - UNLP")
+##    st.markdown("""
+##    <div style="background-color: #f8d7da; padding: 10px; border-radius: 5px; border: 1px solid #ffffff;">
+##        <strong>AVISO DE SEGURIDAD:</strong> Esta herramienta está elaborada para uso de Planificación y no como uso de Proyecto.
+##    </div>
+##""", unsafe_allow_html=True)
+##
+##    # Aquí sigue el resto de la aplicación
+##   
+##
+##    # Mostrar lo que escribió el usuario
+##    st.divider()
+##    st.markdown("__Datos del Aeródromo__")
+##    # Primera línea: Texto y cuadro de entrada
+##    nombre_ad=st.text_input("Nombre de Aeródromo",placeholder="Nombre sin espacios, ex: SABE, AEP, Aeroparque")
+##    Pista=st.text_input("Pista Seleccionada ",placeholder="Indique el Numero correspondiente al THR de Pista, ex.: 19")
+##    ancho_Pista=st.text_input("Ancho de Pista [m]", value="")
+##    st.divider()
+##    st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
+##    Latitud_OP=st.text_input(f"Latitud - THR {Pista}  [Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
+##    Longitud_OP=st.text_input(f"Longitud - THR {Pista} [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
+##    Elevacion_OP=st.text_input(f"Elevación - THR {Pista} [m]",value="")
+##    # Selecciones y entradas
+##
+##    st.divider()
+##    st.markdown("Coordenadas del Extremo de Pista")    
+##    Latitud_EXT=st.text_input(f"Latitud - Extremo de Pista[Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
+##    Longitud_EXT=st.text_input(f"Longitud - Extremo de Pista [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
+##    Elevacion_EXT=st.text_input(f"Elevación - Extremo de Pista [m]", value="")
+##    st.divider()
+##    
+##    st.markdown("__Datos Operativos__")
+##    t_aproximacion = st.selectbox('Tipo de Aproximación',
+##                           ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
+##    
+##    n_clave = st.selectbox('N° de Clave', ['1', '2', '3', '4'])
+##    ref_SHI = st.selectbox('Elevación de Referencia de la SHI.', ['RWY - Operación', 'Punto Medio', 'RWY - Extremo'])
+##    st.divider()
+def dms_to_decimal(dms):
+    """Convierte coordenadas DMS a decimales. Si ya están en decimales, las devuelve sin cambios."""
+    try:
+        # Detectar si ya está en formato decimal
+        if "." in dms and not any(char in dms for char in "NSWE"):
+            # Intentar convertir directamente a float (ya es decimal)
+            return round(float(dms), 8)
+        
+        # Si no es decimal, convertir desde DMS
+        dms = dms.upper().replace("°", "").replace("'", "").replace('"', "").replace(" ", "")
+        hemisphere = 1  # Por defecto positivo
+        if "W" in dms or "S" in dms:
+            hemisphere = -1
+        dms = dms.rstrip("NSEW")  # Remover caracteres de dirección para la conversión
+        degrees = float(dms[:2])  # Los primeros dos caracteres son grados
+        minutes = float(dms[2:4])  # Los siguientes dos son minutos
+        seconds = float(dms[4:])  # El resto son segundos
+        decimal = degrees + (minutes / 60) + (seconds / 3600)
+        return round(decimal * hemisphere, 8)
+    except Exception:
+        return "Error"
+
 def main():
     st.title("GENSLO beta v1.0")
     st.header("Superficies Limitadoras de Obstáculos - Según ANEXO 14 - OACI")
@@ -1693,64 +1878,89 @@ def main():
     <div style="background-color: #f8d7da; padding: 10px; border-radius: 5px; border: 1px solid #ffffff;">
         <strong>AVISO DE SEGURIDAD:</strong> Esta herramienta está elaborada para uso de Planificación y no como uso de Proyecto.
     </div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-    # Aquí sigue el resto de la aplicación
-   
-
-    # Mostrar lo que escribió el usuario
     st.divider()
     st.markdown("__Datos del Aeródromo__")
-    # Primera línea: Texto y cuadro de entrada
-    nombre_ad=st.text_input("Nombre de Aeródromo",placeholder="Nombre sin espacios, ex: SABE, AEP, Aeroparque")
-    Pista=st.text_input("Pista Seleccionada ",placeholder="Indique el Numero correspondiente al THR de Pista, ex.: 19")
-    ancho_Pista=st.text_input("Ancho de Pista [m]", value="")
+    nombre_ad = st.text_input("Nombre de Aeródromo", placeholder="Nombre sin espacios, ex: SABE, AEP, Aeroparque")
+    Pista = st.text_input("Pista Seleccionada", placeholder="Indique el Numero correspondiente al THR de Pista, ex.: 19")
+    ancho_Pista = st.text_input("Ancho de Pista [m]", value="")
     st.divider()
-    st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
-    Latitud_OP=st.text_input(f"Latitud - THR {Pista}  [Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
-    Longitud_OP=st.text_input(f"Longitud - THR {Pista} [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
-    Elevacion_OP=st.text_input(f"Elevación - THR {Pista} [m]",value="")
-    # Selecciones y entradas
 
+    st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
+
+    # Entrada para latitud
+    col1, col2 = st.columns(2)
+    with col1:
+        Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
+                                      value="", placeholder="ex.: -34.906414/  345430.23S/  34°54'30.23''S", key="Latitud_OP_DMS")
+    with col2:
+        Latitud_OP_decimal = dms_to_decimal(Latitud_OP_DMS)  # Convertir a decimal
+        st.text_input("Latitud en Decimales", value=Latitud_OP_decimal, disabled=True, key="Latitud_OP_dec")
+
+    # Entrada para longitud
+    col1, col2 = st.columns(2)
+    with col1:
+        Longitud_OP_DMS = st.text_input(f"Longitud - THR {Pista} [Grados Dec. sin (°) ó  DMS sin (0)]",
+                                       value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W ", key="Longitud_OP_DMS")
+    with col2:
+        Longitud_OP_decimal = dms_to_decimal(Longitud_OP_DMS)  # Convertir a decimal
+        st.text_input("Longitud en Decimales", value=Longitud_OP_decimal, disabled=True, key="Longitud_OP_dec")
+
+    Elevacion_OP = st.text_input(f"Elevación - THR {Pista} [m]", value="", key="Elevacion_OP")
     st.divider()
-    st.markdown("Coordenadas del Extremo de Pista")    
-    Latitud_EXT=st.text_input(f"Latitud - Extremo de Pista[Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
-    Longitud_EXT=st.text_input(f"Longitud - Extremo de Pista [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
-    Elevacion_EXT=st.text_input(f"Elevación - Extremo de Pista [m]", value="")
+
+    st.markdown("Coordenadas del Extremo de Pista")
+
+    # Entrada para latitud del extremo
+    col1, col2 = st.columns(2)
+    with col1:
+        Latitud_EXT_DMS = st.text_input("Latitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
+                                       value="", placeholder="ex.: -34.906414/ 345430.23S/  34°54'30.23''S", key="Latitud_EXT_DMS")
+    with col2:
+        Latitud_EXT_decimal = dms_to_decimal(Latitud_EXT_DMS)  # Convertir a decimal
+        st.text_input("Latitud en Decimales", value=Latitud_EXT_decimal, disabled=True, key="Latitud_EXT_dec")
+
+    # Entrada para longitud del extremo
+    col1, col2 = st.columns(2)
+    with col1:
+        Longitud_EXT_DMS = st.text_input("Longitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
+                                        value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W", key="Longitud_EXT_DMS")
+    with col2:
+        Longitud_EXT_decimal = dms_to_decimal(Longitud_EXT_DMS)  # Convertir a decimal
+        st.text_input("Longitud en Decimales", value=Longitud_EXT_decimal, disabled=True, key="Longitud_EXT_dec")
+
+    Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT")
     st.divider()
-    
+
     st.markdown("__Datos Operativos__")
-    t_aproximacion = st.selectbox('Tipo de Aproximación',
-                           ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
-    
+    t_aproximacion = st.selectbox('Tipo de Aproximación', ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
     n_clave = st.selectbox('N° de Clave', ['1', '2', '3', '4'])
     ref_SHI = st.selectbox('Elevación de Referencia de la SHI.', ['RWY - Operación', 'Punto Medio', 'RWY - Extremo'])
     st.divider()
-#-------------------------------------------------------------------------------------------------------    
+
     # Botón para generar el archivo
     if st.button("Generar .kml", key="boton_kml"):
-     
-        contenido = crear_genslo(nombre_ad,Pista,Longitud_OP,Latitud_OP,
-                                 Elevacion_OP,Longitud_EXT,Latitud_EXT,
-                                 Elevacion_EXT,ancho_Pista,t_aproximacion,
-                                 n_clave,ref_SHI)
+        contenido = crear_genslo(nombre_ad, Pista, Longitud_OP_decimal, Latitud_OP_decimal,
+                                 Elevacion_OP, Longitud_EXT_decimal, Latitud_EXT_decimal,
+                                 Elevacion_EXT, ancho_Pista, t_aproximacion,
+                                 n_clave, ref_SHI)
 
         st.download_button(
             label="Descargar archivo",
             data=documentoFinalKml,
             file_name=f" {nombreFinal}.kml",
             mime="text/plain",
-             key="descargar_kml"
+            key="descargar_kml"
         )
- 
 
-    base_informe='''
+    base_informe = '''
     **************************************************************
     *                        INFORME                             *
     **************************************************************
-          Tipo de Aproximacion: '''+t_aproximacion+'''
+          Tipo de Aproximacion: ''' + t_aproximacion + '''
     *  _______________________________________________________   *
-    * |             --> '''+'Sentido Operación'+''' -->>                |  *
+    * |             --> ''' + 'Sentido Operación' + ''' -->>                |  *
       |   Sentido Operación             Sentido Operación     |  
     * |   ==                                               == |  *
     * |   ==     __   ___  ___   ___   ___   ___   __      == |  *
@@ -1758,36 +1968,35 @@ def main():
     * |_______________________________________________________|  *
     *                                                            *
     *                                                            *
-         Aeropuerto: '''+nombre_ad +'''                       
+         Aeropuerto: ''' + nombre_ad + '''                       
     *                                                            *
     *    --- Coordenadas de Umbrales (Geográficas Dec.) ---      *
     *    Aproximación                                            *
-          Latitud:   '''+Latitud_OP + '''°                   
-          Longitud:  '''+Longitud_OP+ '''°                   
-          Elevación: '''+Elevacion_OP+'''m                    
+          Latitud:   ''' + str(Latitud_OP_decimal) + '''°                   
+          Longitud:  ''' + str(Longitud_OP_decimal) + '''°                   
+          Elevación: ''' + Elevacion_OP + '''m                    
     *                                                            *
     *    Extremo                                                 *
-          Latitud:   '''+Latitud_EXT   +'''°                  
-          Longitud:  '''+Longitud_EXT  +'''°                  
-          Elevación: '''+Elevacion_EXT+'''m                    
+          Latitud:   ''' + str(Latitud_EXT_decimal) + '''°                   
+          Longitud:  ''' + str(Longitud_EXT_decimal) + '''°                   
+          Elevación: ''' + Elevacion_EXT + '''m                    
     *                                                            *
     *     ------ Referencia Sup. Horizontal Interna ------       *
-          Referencia: ''' +ref_SHI+ '''                           
+          Referencia: ''' + ref_SHI + '''                           
     *                                                            *
-          Ancho de Pista: '''+ancho_Pista +'''m
+          Ancho de Pista: ''' + ancho_Pista + '''m
     *                                                            *
     *                                                            *
-          N° Clave: '''+ n_clave +'''                       
+          N° Clave: ''' + n_clave + '''                       
     *                                                            *
     **************************************************************  '''
-    ## 
-    
+
     st.download_button(
         label="Descargar Informe",
         data=base_informe,
         file_name=f" {nombre_ad}.txt",
         mime="text/plain",
-         key="descargar_informe"
+        key="descargar_informe"
     )
 
 if __name__ == '__main__':
