@@ -1868,7 +1868,7 @@ def dms_to_decimal(dms):
         decimal = degrees + (minutes / 60) + (seconds / 3600)
         return round(decimal * hemisphere, 8)
     except Exception:
-        return "Error"
+        return " "
 
 def main():
     st.title("GENSLO beta v1.0")
