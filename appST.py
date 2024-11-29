@@ -1884,7 +1884,7 @@ def main():
     st.markdown("__Datos del Aeródromo__")
     nombre_ad = st.text_input("Nombre de Aeródromo", placeholder="Nombre sin espacios, ex: SABE, AEP, Aeroparque")
     Pista = st.text_input("Pista Seleccionada", placeholder="Indique el Numero correspondiente al THR de Pista, ex.: 19")
-    ancho_Pista = st.text_input("Ancho de Pista [m]", value="")
+    ancho_Pista = st.text_input("Ancho de Pista [m]", value="", placeholder="ex.:  45.25 ")
     st.divider()
 
     st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
@@ -1907,7 +1907,7 @@ def main():
         Longitud_OP_decimal = dms_to_decimal(Longitud_OP_DMS)  # Convertir a decimal
         st.text_input("Longitud en Decimales", value=Longitud_OP_decimal, disabled=True, key="Longitud_OP_dec")
 
-    Elevacion_OP = st.text_input(f"Elevación - THR {Pista} [m]", value="", key="Elevacion_OP")
+    Elevacion_OP = st.text_input(f"Elevación - THR {Pista} [m]", value="", key="Elevacion_OP", placeholder="ex.:  15.25 ")
     st.divider()
 
     st.markdown("Coordenadas del Extremo de Pista")
@@ -1930,7 +1930,7 @@ def main():
         Longitud_EXT_decimal = dms_to_decimal(Longitud_EXT_DMS)  # Convertir a decimal
         st.text_input("Longitud en Decimales", value=Longitud_EXT_decimal, disabled=True, key="Longitud_EXT_dec")
 
-    Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT")
+    Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT", placeholder="ex.:  15.25 ")
     st.divider()
 
     st.markdown("__Datos Operativos__")
