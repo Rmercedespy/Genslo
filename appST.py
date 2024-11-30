@@ -1875,7 +1875,7 @@ def main():
     st.header("Superficies Limitadoras de Obstáculos - Según ANEXO 14 - OACI")
     st.subheader("Grupo de Transporte Aéreo (GTA) - UNLP")
     st.markdown("""
-    <div style="background-color: #34495E; padding: 10px; border-radius: 5px; border: 1px solid #ffffff;">
+    <div style="background-color: #fc4c4c; padding: 10px; border-radius: 5px; border: 1px solid #ffffff;">
         <strong>AVISO DE SEGURIDAD:</strong> Esta herramienta está elaborada para uso de Planificación y no como uso de Proyecto.
     </div>
     """, unsafe_allow_html=True)
