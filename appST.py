@@ -1999,7 +1999,6 @@ def main():
         key="descargar_informe"
     )
     
-    st.components.v1.html(iframe_html, height=450)
 
 if __name__ == '__main__':
     main()
