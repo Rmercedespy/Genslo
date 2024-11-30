@@ -1682,7 +1682,7 @@ def crear_genslo(nombre_ad,Pista,Longitud_OP,Latitud_OP,Elevacion_OP,Longitud_EX
 
 
     # ************************** GRUPO DE RButton  ***********************************
-    if ref_SHI=='RWY - Operación':
+    if ref_SHI=='RWY - THR':
         var=0
     elif ref_SHI=='RWY - Extremo':
         var=1
@@ -1846,7 +1846,7 @@ def crear_genslo(nombre_ad,Pista,Longitud_OP,Latitud_OP,Elevacion_OP,Longitud_EX
 ##                           ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
 ##    
 ##    n_clave = st.selectbox('N° de Clave', ['1', '2', '3', '4'])
-##    ref_SHI = st.selectbox('Elevación de Referencia de la SHI.', ['RWY - Operación', 'Punto Medio', 'RWY - Extremo'])
+##    ref_SHI = st.selectbox('Elevación de Referencia de la SHI.', ['RWY - THR', 'Punto Medio', 'RWY - Extremo'])
 ##    st.divider()
 def dms_to_decimal(dms):
     """Convierte coordenadas DMS a decimales. Si ya están en decimales, las devuelve sin cambios."""
@@ -1954,7 +1954,7 @@ def main():
     st.markdown("__Datos Operativos__")
     t_aproximacion = st.selectbox('Tipo de Aproximación', ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
     n_clave = st.selectbox('N° de Clave', ['1', '2', '3', '4'])
-    ref_SHI = st.selectbox('Elevación de Referencia de la SHI.', ['RWY - Operación', 'Punto Medio', 'RWY - Extremo'])
+    ref_SHI = st.selectbox('Elevación de Referencia de la SHI.', ['RWY - THR', 'Punto Medio', 'RWY - Extremo'])
     st.divider()
 
     # Botón para generar el archivo
