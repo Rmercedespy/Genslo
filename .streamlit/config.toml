@@ -1,0 +1,5 @@
+[browser]
+server.enableXsrfProtection = false
+
+[server]
+enableCORS = false
