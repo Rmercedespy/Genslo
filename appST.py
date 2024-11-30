@@ -1871,6 +1871,20 @@ def dms_to_decimal(dms):
         return " "
 
 def main():
+  st.markdown(
+        """
+        <style>
+        .stApp {
+            background-color: #f7f7f7; /* Color gris suave */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* Asegura que ocupe toda la altura */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     st.title("GENSLO beta v1.0")
     st.header("Superficies Limitadoras de Obstáculos - Según ANEXO 14 - OACI")
     st.subheader("Grupo de Transporte Aéreo (GTA) - UNLP")
