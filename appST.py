@@ -1871,7 +1871,27 @@ def dms_to_decimal(dms):
         return " "
 
 def main():
-    st.markdown(
+  st.markdown(
+    """
+    <style>
+    div.stButton > button:first-child {
+        background-color: #28a745; /* Verde profesional */
+        color: white; /* Texto blanco */
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+    div.stButton > button:first-child:hover {
+        background-color: #218838; /* Verde más oscuro al pasar el mouse */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+  )  
+
+  st.markdown(
         """
         <style>
         .stApp {
