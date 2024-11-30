@@ -1871,7 +1871,7 @@ def dms_to_decimal(dms):
         return " "
 
 def main():
-   st.markdown(
+    st.markdown(
         """
         <style>
         .stApp {
@@ -1883,7 +1883,8 @@ def main():
         }
         </style>
         """,
-        unsafe_allow_html=True)
+        unsafe_allow_html=True
+    )
     st.title("GENSLO beta v1.0")
     st.header("Superficies Limitadoras de Obstáculos - Según ANEXO 14 - OACI")
     st.subheader("Grupo de Transporte Aéreo (GTA) - UNLP")
