@@ -1277,7 +1277,7 @@ def obtener(longitudFranja,anchuraFranja,
                
 
     # Area Superficie Horizontal Interna 
-    Sup_HI=p_folder_circ3+' '+p_folder_circ31+' '+p_folder_circ3[0:25]
+    Sup_HI=p_folder_circ3+' '+p_folder_circ31+' '+p_folder_circ3.split(" ")[0]
 
              
 ##    SHI='<Placemark> \n\
@@ -1455,7 +1455,7 @@ def obtener(longitudFranja,anchuraFranja,
                
 
     # Area Superficie Horizontal Interna 
-    Sup_C=c_folder_circ3+' '+c_folder_circ31+' '+c_folder_circ3[0:25]
+    Sup_C=c_folder_circ3+' '+c_folder_circ31+' '+c_folder_circ3.split(" ")[0]
 
 ##    if P1Long > P2Long:
 ##        mpendiente = (P2Lat - P1Lat) / (P2Long - P1Long)
