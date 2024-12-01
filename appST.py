@@ -72,61 +72,51 @@ def obtener(longitudFranja,anchuraFranja,
   <Style id="Franja"> \n\
     <PolyStyle> \n\
       <color>640078B4</color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n\
   <Style id="HI"> \n\
     <PolyStyle> \n\
       <color>64F0B414</color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n\
   <Style id="C"> \n\
     <PolyStyle> \n\
       <color>64F0E614</color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n\
   <Style id="ASC"> \n\
     <PolyStyle> \n\
       <color>647828F0</color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n\
   <Style id="Resa"> \n\
     <PolyStyle> \n\
       <color>E6E74C3C</color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n\
   <Style id="Aprox"> \n\
     <PolyStyle> \n\
       <color>641400FF</color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n\
   <Style id="Aprox2"> \n\
     <PolyStyle> \n\
       <color>641478FF</color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n\
   <Style id="Aprox3"> \n\
     <PolyStyle> \n\
       <color>6414F0FF</color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n\
   <Style id="TRAN"> \n\
     <PolyStyle> \n\
       <color>64009614</color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n\
   <Style id="Pista1"> \n\
     <PolyStyle> \n\
       <color>CB4D5656 </color> \n\
-      <width>1</width> \n\
     </PolyStyle> \n\
   </Style> \n' #FF000000: color Negro, se define el color general    
 
