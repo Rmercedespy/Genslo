@@ -1167,7 +1167,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(c2,c1,hmf,huso)
                 c=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(c3)
                 cir_der.append(c)
-                p_folder_circ=str(cir_der)[1:-1]
+                p_folder_circ = "\n".join(cir_der)#p_folder_circ=str(cir_der)[1:-1]
                 p_folder_circ2=p_folder_circ.replace("',","")
                 p_folder_circ3=p_folder_circ2.replace("'","")
             for v in range(ang_cir_der3,ang_cir_der4,1):
@@ -1176,9 +1176,9 @@ def obtener(longitudFranja,anchuraFranja,
                 c3=(hi_altura_final)
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(c2,c1,hmf,huso)
                 c=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(c3)
-                #print(c)
+                print(c)
                 cir_der1.append(c)
-                p_folder_circ1=str(cir_der1)[1:-1]
+                p_folder_circ1 = "\n".join(cir_der1)#p_folder_circ1=str(cir_der1)[1:-1]
                 p_folder_circ21=p_folder_circ1.replace("',","")
                 p_folder_circ31=p_folder_circ21.replace("'","")
 ##                print(f' aqui-')
@@ -1197,7 +1197,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(c2,c1,hmf,huso)
                 c=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(c3)
                 cir_der.append(c)
-                p_folder_circ=str(cir_der)[1:-1]
+                p_folder_circ = "\n".join(cir_der)#p_folder_circ=str(cir_der)[1:-1]
                 p_folder_circ2=p_folder_circ.replace("',","")
                 p_folder_circ3=p_folder_circ2.replace("'","")
             for v in range(ang_cir_der3,ang_cir_der4,1):
@@ -1207,7 +1207,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(c2,c1,hmf,huso)
                 c=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(c3)
                 cir_der1.append(c)
-                p_folder_circ1=str(cir_der1)[1:-1]
+                p_folder_circ1 = "\n".join(cir_der1)#p_folder_circ1=str(cir_der1)[1:-1]
                 p_folder_circ21=p_folder_circ1.replace("',","")
                 p_folder_circ31=p_folder_circ21.replace("'","")
 
@@ -1226,7 +1226,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(c2,c1,hmf,huso)
                 c=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(hi_altura_final)
                 cir_der.append(c)
-                p_folder_circ=str(cir_der)[1:-1]
+                p_folder_circ = "\n".join(cir_der)#p_folder_circ=str(cir_der)[1:-1]
                 p_folder_circ2=p_folder_circ.replace("',","")
                 p_folder_circ3=p_folder_circ2.replace("'","")
             for v in range(ang_cir_der3,ang_cir_der4,1):
@@ -1235,7 +1235,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(c2,c1,hmf,huso)
                 c=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(hi_altura_final)
                 cir_der1.append(c)
-                p_folder_circ1=str(cir_der1)[1:-1]
+                p_folder_circ1 = "\n".join(cir_der1)#p_folder_circ1=str(cir_der1)[1:-1]
                 p_folder_circ21=p_folder_circ1.replace("',","")
                 p_folder_circ31=p_folder_circ21.replace("'","")
                
@@ -1252,7 +1252,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(c2,c1,hmf,huso)
                 c=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(hi_altura_final)
                 cir_der.append(c)
-                p_folder_circ=str(cir_der)[1:-1]
+                p_folder_circ = "\n".join(cir_der)#p_folder_circ=str(cir_der)[1:-1]
                 p_folder_circ2=p_folder_circ.replace("',","")
                 p_folder_circ3=p_folder_circ2.replace("'","")
             for v in range(ang_cir_der3,ang_cir_der4,1):
@@ -1261,13 +1261,14 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(c2,c1,hmf,huso)
                 c=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(hi_altura_final)
                 cir_der1.append(c)# append sirve para añADIR elemento al final de la lista 
-                p_folder_circ1=str(cir_der1)[1:-1]
+                p_folder_circ1 = "\n".join(cir_der1)#p_folder_circ1=str(cir_der1)[1:-1]
                 p_folder_circ21=p_folder_circ1.replace("',","")
                 p_folder_circ31=p_folder_circ21.replace("'","")
                
 
     # Area Superficie Horizontal Interna 
-    Sup_HI=p_folder_circ3+' '+p_folder_circ31+' '+p_folder_circ3.split(" ")[0]
+    Sup_HI=p_folder_circ3+'\n'+p_folder_circ31+'\n'+p_folder_circ3.split("\n")[0]  #p_folder_circ3[0:25]
+    #print(f" p_folder_circ3: {p_folder_circ3[0:25]}")
 
              
 ##    SHI='<Placemark> \n\
@@ -1341,7 +1342,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
                 cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der.append(cc)
-                c_folder_circ=str(cir_der)[1:-1]
+                c_folder_circ = "\n".join(cir_der)#c_folder_circ=str(cir_der)[1:-1]
                 c_folder_circ2=c_folder_circ.replace("',","")
                 c_folder_circ3=c_folder_circ2.replace("'","")
             for v in range(ang_cir_derc3,ang_cir_derc4,1):
@@ -1352,7 +1353,7 @@ def obtener(longitudFranja,anchuraFranja,
                 cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 #print(c)
                 cir_der1.append(cc)
-                c_folder_circ1=str(cir_der1)[1:-1]
+                c_folder_circ1 = "\n".join(cir_der1)#c_folder_circ1=str(cir_der1)[1:-1]
                 c_folder_circ21=c_folder_circ1.replace("',","")
                 c_folder_circ31=c_folder_circ21.replace("'","")
 ##                print(f' aqui-')
@@ -1371,7 +1372,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
                 cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der.append(cc)
-                c_folder_circ=str(cir_der)[1:-1]
+                c_folder_circ = "\n".join(cir_der)#c_folder_circ=str(cir_der)[1:-1]
                 c_folder_circ2=c_folder_circ.replace("',","")
                 c_folder_circ3=c_folder_circ2.replace("'","")
             for v in range(ang_cir_derc3,ang_cir_derc4,1):
@@ -1381,7 +1382,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
                 cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der1.append(cc)
-                c_folder_circ1=str(cir_der1)[1:-1]
+                c_folder_circ1 = "\n".join(cir_der1)#c_folder_circ1=str(cir_der1)[1:-1]
                 c_folder_circ21=c_folder_circ1.replace("',","")
                 c_folder_circ31=c_folder_circ21.replace("'","")
 
@@ -1401,7 +1402,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
                 cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der.append(cc)
-                c_folder_circ=str(cir_der)[1:-1]
+                c_folder_circ = "\n".join(cir_der)#c_folder_circ=str(cir_der)[1:-1]
                 c_folder_circ2=c_folder_circ.replace("',","")
                 c_folder_circ3=c_folder_circ2.replace("'","")
             for v in range(ang_cir_derc3,ang_cir_derc4,1):
@@ -1411,7 +1412,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
                 cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der1.append(cc)
-                c_folder_circ1=str(cir_der1)[1:-1]
+                c_folder_circ1 = "\n".join(cir_der1)#c_folder_circ1=str(cir_der1)[1:-1]
                 c_folder_circ21=c_folder_circ1.replace("',","")
                 c_folder_circ31=c_folder_circ21.replace("'","")
                
@@ -1429,7 +1430,7 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
                 cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der.append(cc)
-                c_folder_circ=str(cir_der)[1:-1]
+                c_folder_circ = "\n".join(cir_der)#c_folder_circ=str(cir_der)[1:-1]
                 c_folder_circ2=c_folder_circ.replace("',","")
                 c_folder_circ3=c_folder_circ2.replace("'","")
             for v in range(ang_cir_derc3,ang_cir_derc4,1):
@@ -1439,13 +1440,13 @@ def obtener(longitudFranja,anchuraFranja,
                 UTMtoDecLong,UTMtoDecLat=convertir_utm_dec(cc2,cc1,hmf,huso)
                 cc=str(UTMtoDecLong)+','+str(UTMtoDecLat)+','+str(cc3)
                 cir_der1.append(cc)# append sirve para añADIR elemento al final de la lista 
-                c_folder_circ1=str(cir_der1)[1:-1]
+                c_folder_circ1 = "\n".join(cir_der1)#c_folder_circ1=str(cir_der1)[1:-1]
                 c_folder_circ21=c_folder_circ1.replace("',","")
                 c_folder_circ31=c_folder_circ21.replace("'","")
                
 
     # Area Superficie Horizontal Interna 
-    Sup_C=c_folder_circ3+' '+c_folder_circ31+' '+c_folder_circ3.split(" ")[0]
+    Sup_C=c_folder_circ3+'\n'+c_folder_circ31+'\n'+c_folder_circ3.split("\n")[0]
 
 ##    if P1Long > P2Long:
 ##        mpendiente = (P2Lat - P1Lat) / (P2Long - P1Long)
@@ -1797,47 +1798,6 @@ def crear_genslo(nombre_ad,Pista,Longitud_OP,Latitud_OP,Elevacion_OP,Longitud_EX
 #-------------------------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------------------------
 
-##def main():
-##    st.title("GENSLO beta v1.0")
-##    st.header("Superficies Limitadoras de Obstáculos - Según ANEXO 14 - OACI")
-##    st.subheader("Grupo de Transporte Aéreo (GTA) - UNLP")
-##    st.markdown("""
-##    <div style="background-color: #f8d7da; padding: 10px; border-radius: 5px; border: 1px solid #ffffff;">
-##        <strong>AVISO DE SEGURIDAD:</strong> Esta herramienta está elaborada para uso de Planificación y no como uso de Proyecto.
-##    </div>
-##""", unsafe_allow_html=True)
-##
-##    # Aquí sigue el resto de la aplicación
-##   
-##
-##    # Mostrar lo que escribió el usuario
-##    st.divider()
-##    st.markdown("__Datos del Aeródromo__")
-##    # Primera línea: Texto y cuadro de entrada
-##    nombre_ad=st.text_input("Nombre de Aeródromo",placeholder="Nombre sin espacios, ex: SABE, AEP, Aeroparque")
-##    Pista=st.text_input("Pista Seleccionada ",placeholder="Indique el Numero correspondiente al THR de Pista, ex.: 19")
-##    ancho_Pista=st.text_input("Ancho de Pista [m]", value="")
-##    st.divider()
-##    st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
-##    Latitud_OP=st.text_input(f"Latitud - THR {Pista}  [Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
-##    Longitud_OP=st.text_input(f"Longitud - THR {Pista} [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
-##    Elevacion_OP=st.text_input(f"Elevación - THR {Pista} [m]",value="")
-##    # Selecciones y entradas
-##
-##    st.divider()
-##    st.markdown("Coordenadas del Extremo de Pista")    
-##    Latitud_EXT=st.text_input(f"Latitud - Extremo de Pista[Grados Decimales sin °]", value="",placeholder="ex.:  -34.906414")
-##    Longitud_EXT=st.text_input(f"Longitud - Extremo de Pista [Grados Decimales sin °]", value="",placeholder="ex.:  -57.943292")
-##    Elevacion_EXT=st.text_input(f"Elevación - Extremo de Pista [m]", value="")
-##    st.divider()
-##    
-##    st.markdown("__Datos Operativos__")
-##    t_aproximacion = st.selectbox('Tipo de Aproximación',
-##                           ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
-##    
-##    n_clave = st.selectbox('N° de Clave', ['1', '2', '3', '4'])
-##    ref_SHI = st.selectbox('Elevación de Referencia de la SHI.', ['RWY - THR', 'Punto Medio', 'RWY - Extremo'])
-##    st.divider()
 def dms_to_decimal(dms):
     """Convierte coordenadas DMS a decimales. Si ya están en decimales, las devuelve sin cambios."""
     try:
