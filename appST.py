@@ -1903,8 +1903,8 @@ def main():
 
     st.markdown("__Datos Operativos__")
     t_aproximacion = st.selectbox('Tipo de Aproximación', ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
-    n_clave = st.selectbox('N° de Clave', ['1', '2', '3', '4'])
-    ref_SHI = st.selectbox('Elevación de Referencia de la SHI.', ['RWY - THR', 'Punto Medio', 'RWY - Extremo'])
+    n_clave = st.selectbox('N° de Clave de Referencia de Aeródromo', ['1', '2', '3', '4'])
+    ref_SHI = st.selectbox('Elevación de Referencia de la Superficie Horizontal Interna (SHI)', ['RWY - THR', 'Punto Medio', 'RWY - Extremo'])
     st.divider()
 
     # Botón para generar el archivo
