@@ -1856,6 +1856,18 @@ def main():
     st.divider()
 
     st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
+    # Inicializar valores en session_state si no existen
+    for key in ["Latitud_OP_DMS", "Longitud_OP_DMS", "Elevacion_OP",
+                "Latitud_EXT_DMS", "Longitud_EXT_DMS", "Elevacion_EXT"]:
+        if key not in st.session_state:
+            st.session_state[key] = ""
+    
+    # Botón para invertir coordenadas y elevaciones
+    if st.button("🔄 Invertir Puntos OP ↔ EXT"):
+        st.session_state["Latitud_OP_DMS"], st.session_state["Latitud_EXT_DMS"] = st.session_state["Latitud_EXT_DMS"], st.session_state["Latitud_OP_DMS"]
+        st.session_state["Longitud_OP_DMS"], st.session_state["Longitud_EXT_DMS"] = st.session_state["Longitud_EXT_DMS"], st.session_state["Longitud_OP_DMS"]
+        st.session_state["Elevacion_OP"], st.session_state["Elevacion_EXT"] = st.session_state["Elevacion_EXT"], st.session_state["Elevacion_OP"]
+
 
   
     # Entrada para latitud
