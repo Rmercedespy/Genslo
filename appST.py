@@ -1855,7 +1855,9 @@ def main():
     ancho_Pista = st.text_input("Ancho de Pista [m]", value="", placeholder="ex.:  45.25 ")
     st.divider()
 
-    st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
+    
+    
+    
     # Inicializar valores en session_state si no existen
     for key in ["Latitud_OP_DMS", "Longitud_OP_DMS", "Elevacion_OP",
                 "Latitud_EXT_DMS", "Longitud_EXT_DMS", "Elevacion_EXT"]:
@@ -1868,7 +1870,7 @@ def main():
         st.session_state["Longitud_OP_DMS"], st.session_state["Longitud_EXT_DMS"] = st.session_state["Longitud_EXT_DMS"], st.session_state["Longitud_OP_DMS"]
         st.session_state["Elevacion_OP"], st.session_state["Elevacion_EXT"] = st.session_state["Elevacion_EXT"], st.session_state["Elevacion_OP"]
 
-
+    st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
   
     # Entrada para latitud
     col1, col2 = st.columns(2)
