@@ -1901,7 +1901,10 @@ def main():
     Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT", placeholder="ex.:  15.25 ")
     st.divider()
   
-    st.button("Cambiar Pista de Operación",key="boton_invertir"):
+    if st.button("Cambiar Pista de Operación",key="boton_invertir"):
+      with col1:
+        Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista}",value=Latitud_EXT_DMS, disabled=True, key="Longitud_OP")
+      
 
     st.divider()
 
