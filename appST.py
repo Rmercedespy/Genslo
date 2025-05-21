@@ -1827,6 +1827,14 @@ def dms_to_decimal(dms_str):
     return dms_str  # Simulación temporal
 
 def main():
+  # Inicialización segura al comienzo de `main()`
+  for key in [
+      "Latitud_OP_DMS", "Longitud_OP_DMS", "Elevacion_OP",
+      "Latitud_EXT_DMS", "Longitud_EXT_DMS", "Elevacion_EXT"
+  ]:
+      if key not in st.session_state:
+          st.session_state[key] = ""
+
     st.markdown(
     """
     <style>
