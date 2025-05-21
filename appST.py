@@ -1859,53 +1859,53 @@ def main():
 
     # Entrada para latitud
     col1, col2 = st.columns(2)
-with col1:
-    Latitud_OP_DMS = st.text_input("Latitud - THR [DMS o decimal]", 
-                                   value=st.session_state.get("Latitud_OP_DMS", ""), 
-                                   key="Latitud_OP_DMS")
-with col2:
-    Latitud_OP_decimal = dms_to_decimal(st.session_state["Latitud_OP_DMS"])
-    st.text_input("Latitud en Decimales", value=Latitud_OP_decimal, disabled=True)
-
-col1, col2 = st.columns(2)
-with col1:
-    Longitud_OP_DMS = st.text_input("Longitud - THR [DMS o decimal]", 
-                                    value=st.session_state.get("Longitud_OP_DMS", ""), 
-                                    key="Longitud_OP_DMS")
-with col2:
-    Longitud_OP_decimal = dms_to_decimal(st.session_state["Longitud_OP_DMS"])
-    st.text_input("Longitud en Decimales", value=Longitud_OP_decimal, disabled=True)
-
-Elevacion_OP = st.text_input("Elevación - THR [m]", 
-                             value=st.session_state.get("Elevacion_OP", ""), 
-                             key="Elevacion_OP")
-
-st.divider()
-
-# --- ENTRADA EXT ---
-st.subheader("Coordenadas EXT")
-
-col1, col2 = st.columns(2)
-with col1:
-    Latitud_EXT_DMS = st.text_input("Latitud - EXT [DMS o decimal]", 
-                                    value=st.session_state.get("Latitud_EXT_DMS", ""), 
-                                    key="Latitud_EXT_DMS")
-with col2:
-    Latitud_EXT_decimal = dms_to_decimal(st.session_state["Latitud_EXT_DMS"])
-    st.text_input("Latitud en Decimales", value=Latitud_EXT_decimal, disabled=True)
-
-col1, col2 = st.columns(2)
-with col1:
-    Longitud_EXT_DMS = st.text_input("Longitud - EXT [DMS o decimal]", 
-                                     value=st.session_state.get("Longitud_EXT_DMS", ""), 
-                                     key="Longitud_EXT_DMS")
-with col2:
-    Longitud_EXT_decimal = dms_to_decimal(st.session_state["Longitud_EXT_DMS"])
-    st.text_input("Longitud en Decimales", value=Longitud_EXT_decimal, disabled=True)
-
-Elevacion_EXT = st.text_input("Elevación - EXT [m]", 
-                              value=st.session_state.get("Elevacion_EXT", ""), 
-                              key="Elevacion_EXT")
+    with col1:
+        Latitud_OP_DMS = st.text_input("Latitud - THR [DMS o decimal]", 
+                                       value=st.session_state.get("Latitud_OP_DMS", ""), 
+                                       key="Latitud_OP_DMS")
+    with col2:
+        Latitud_OP_decimal = dms_to_decimal(st.session_state["Latitud_OP_DMS"])
+        st.text_input("Latitud en Decimales", value=Latitud_OP_decimal, disabled=True)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        Longitud_OP_DMS = st.text_input("Longitud - THR [DMS o decimal]", 
+                                        value=st.session_state.get("Longitud_OP_DMS", ""), 
+                                        key="Longitud_OP_DMS")
+    with col2:
+        Longitud_OP_decimal = dms_to_decimal(st.session_state["Longitud_OP_DMS"])
+        st.text_input("Longitud en Decimales", value=Longitud_OP_decimal, disabled=True)
+    
+    Elevacion_OP = st.text_input("Elevación - THR [m]", 
+                                 value=st.session_state.get("Elevacion_OP", ""), 
+                                 key="Elevacion_OP")
+    
+    st.divider()
+    
+    # --- ENTRADA EXT ---
+    st.subheader("Coordenadas EXT")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        Latitud_EXT_DMS = st.text_input("Latitud - EXT [DMS o decimal]", 
+                                        value=st.session_state.get("Latitud_EXT_DMS", ""), 
+                                        key="Latitud_EXT_DMS")
+    with col2:
+        Latitud_EXT_decimal = dms_to_decimal(st.session_state["Latitud_EXT_DMS"])
+        st.text_input("Latitud en Decimales", value=Latitud_EXT_decimal, disabled=True)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        Longitud_EXT_DMS = st.text_input("Longitud - EXT [DMS o decimal]", 
+                                         value=st.session_state.get("Longitud_EXT_DMS", ""), 
+                                         key="Longitud_EXT_DMS")
+    with col2:
+        Longitud_EXT_decimal = dms_to_decimal(st.session_state["Longitud_EXT_DMS"])
+        st.text_input("Longitud en Decimales", value=Longitud_EXT_decimal, disabled=True)
+    
+    Elevacion_EXT = st.text_input("Elevación - EXT [m]", 
+                                  value=st.session_state.get("Elevacion_EXT", ""), 
+                                  key="Elevacion_EXT")
 
 st.divider()
 
