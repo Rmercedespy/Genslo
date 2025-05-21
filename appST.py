@@ -1857,20 +1857,22 @@ def main():
 
     st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
 
+    # Entrada para latitud
     col1, col2 = st.columns(2)
     with col1:
         Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
                                       value="", placeholder="ex.: -34.906414/  345430.23S/  34°54'30.23''S", key="Latitud_OP_DMS")
     with col2:
-        Latitud_OP_decimal = dms_to_decimal(Latitud_OP_DMS)
+        Latitud_OP_decimal = dms_to_decimal(Latitud_OP_DMS)  # Convertir a decimal
         st.text_input("Latitud en Decimales", value=Latitud_OP_decimal, disabled=True, key="Latitud_OP_dec")
 
+    # Entrada para longitud
     col1, col2 = st.columns(2)
     with col1:
         Longitud_OP_DMS = st.text_input(f"Longitud - THR {Pista} [Grados Dec. sin (°) ó  DMS sin (0)]",
                                        value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W ", key="Longitud_OP_DMS")
     with col2:
-        Longitud_OP_decimal = dms_to_decimal(Longitud_OP_DMS)
+        Longitud_OP_decimal = dms_to_decimal(Longitud_OP_DMS)  # Convertir a decimal
         st.text_input("Longitud en Decimales", value=Longitud_OP_decimal, disabled=True, key="Longitud_OP_dec")
 
     Elevacion_OP = st.text_input(f"Elevación - THR {Pista} [m]", value="", key="Elevacion_OP", placeholder="ex.:  15.25 ")
@@ -1878,36 +1880,26 @@ def main():
 
     st.markdown("Coordenadas del Extremo de Pista")
 
+    # Entrada para latitud del extremo
     col1, col2 = st.columns(2)
     with col1:
         Latitud_EXT_DMS = st.text_input("Latitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
                                        value="", placeholder="ex.: -34.906414/ 345430.23S/  34°54'30.23''S", key="Latitud_EXT_DMS")
     with col2:
-        Latitud_EXT_decimal = dms_to_decimal(Latitud_EXT_DMS)
+        Latitud_EXT_decimal = dms_to_decimal(Latitud_EXT_DMS)  # Convertir a decimal
         st.text_input("Latitud en Decimales", value=Latitud_EXT_decimal, disabled=True, key="Latitud_EXT_dec")
 
+    # Entrada para longitud del extremo
     col1, col2 = st.columns(2)
     with col1:
         Longitud_EXT_DMS = st.text_input("Longitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
                                         value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W", key="Longitud_EXT_DMS")
     with col2:
-        Longitud_EXT_decimal = dms_to_decimal(Longitud_EXT_DMS)
+        Longitud_EXT_decimal = dms_to_decimal(Longitud_EXT_DMS)  # Convertir a decimal
         st.text_input("Longitud en Decimales", value=Longitud_EXT_decimal, disabled=True, key="Longitud_EXT_dec")
 
     Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT", placeholder="ex.:  15.25 ")
     st.divider()
-
-    # Botón para intercambiar coordenadas
-    if st.button("Intercambiar THR y EXT"):
-        for k1, k2 in [
-            ("Latitud_OP_DMS", "Latitud_EXT_DMS"),
-            ("Longitud_OP_DMS", "Longitud_EXT_DMS"),
-            ("Elevacion_OP", "Elevacion_EXT")
-        ]:
-            v1 = st.session_state.get(k1, "")
-            v2 = st.session_state.get(k2, "")
-            st.session_state[k1] = v2
-            st.session_state[k2] = v1
 
     st.markdown("__Datos Operativos__")
     t_aproximacion = st.selectbox('Tipo de Aproximación', ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
@@ -1915,6 +1907,7 @@ def main():
     ref_SHI = st.selectbox('Elevación de Referencia de la Superficie Horizontal Interna (SHI)', ['RWY - THR', 'Punto Medio', 'RWY - Extremo'])
     st.divider()
 
+    # Botón para generar el archivo
     if st.button("Generar .kml", key="boton_kml"):
         contenido = crear_genslo(nombre_ad, Pista, Longitud_OP_decimal, Latitud_OP_decimal,
                                  Elevacion_OP, Longitud_EXT_decimal, Latitud_EXT_decimal,
@@ -1973,6 +1966,8 @@ def main():
         mime="text/plain",
         key="descargar_informe"
     )
+    
 
 if __name__ == '__main__':
     main()
+
