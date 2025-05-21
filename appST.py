@@ -1857,6 +1857,30 @@ def main():
 
     st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
 
+
+    for key in [
+        "Latitud_OP_DMS", "Longitud_OP_DMS", "Elevacion_OP",
+        "Latitud_EXT_DMS", "Longitud_EXT_DMS", "Elevacion_EXT"
+    ]:
+        if key not in st.session_state:
+            st.session_state[key] = ""
+    
+    # Botón para intercambiar datos
+    if st.button("Intercambiar THR <-> Ext.", key="swap_button"):
+        temp_lat = st.session_state["Latitud_OP_DMS"]
+        temp_lon = st.session_state["Longitud_OP_DMS"]
+        temp_elev = st.session_state["Elevacion_OP"]
+    
+        st.session_state["Latitud_OP_DMS"] = st.session_state["Latitud_EXT_DMS"]
+        st.session_state["Longitud_OP_DMS"] = st.session_state["Longitud_EXT_DMS"]
+        st.session_state["Elevacion_OP"] = st.session_state["Elevacion_EXT"]
+    
+        st.session_state["Latitud_EXT_DMS"] = temp_lat
+        st.session_state["Longitud_EXT_DMS"] = temp_lon
+        st.session_state["Elevacion_EXT"] = temp_elev
+
+  
+  
     # Entrada para latitud
     col1, col2 = st.columns(2)
     with col1:
@@ -1899,12 +1923,6 @@ def main():
         st.text_input("Longitud en Decimales", value=Longitud_EXT_decimal, disabled=True, key="Longitud_EXT_dec")
 
     Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT", placeholder="ex.:  15.25 ")
-    st.divider()
-  
-    if st.button("Cambiar Pista de Operación",key="boton_invertir"):
-      with col1:
-        Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista}",value=Latitud_EXT_DMS, disabled=True, key="Longitud_OP")
-      
 
     st.divider()
 
