@@ -1857,7 +1857,6 @@ def main():
 
     st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
 
-    # Entrada para latitud
     col1, col2 = st.columns(2)
     with col1:
         Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
@@ -1866,7 +1865,6 @@ def main():
         Latitud_OP_decimal = dms_to_decimal(Latitud_OP_DMS)
         st.text_input("Latitud en Decimales", value=Latitud_OP_decimal, disabled=True, key="Latitud_OP_dec")
 
-    # Entrada para longitud
     col1, col2 = st.columns(2)
     with col1:
         Longitud_OP_DMS = st.text_input(f"Longitud - THR {Pista} [Grados Dec. sin (°) ó  DMS sin (0)]",
@@ -1880,7 +1878,6 @@ def main():
 
     st.markdown("Coordenadas del Extremo de Pista")
 
-    # Entrada para latitud del extremo
     col1, col2 = st.columns(2)
     with col1:
         Latitud_EXT_DMS = st.text_input("Latitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
@@ -1889,7 +1886,6 @@ def main():
         Latitud_EXT_decimal = dms_to_decimal(Latitud_EXT_DMS)
         st.text_input("Latitud en Decimales", value=Latitud_EXT_decimal, disabled=True, key="Latitud_EXT_dec")
 
-    # Entrada para longitud del extremo
     col1, col2 = st.columns(2)
     with col1:
         Longitud_EXT_DMS = st.text_input("Longitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
@@ -1901,21 +1897,17 @@ def main():
     Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT", placeholder="ex.:  15.25 ")
     st.divider()
 
-    # Botón para intercambiar datos
-    if st.button("Intercambiar Coordenadas y Elevación OP <-> EXT"):
-        temp_lat_dms = st.session_state["Latitud_OP_DMS"]
-        st.session_state["Latitud_OP_DMS"] = st.session_state["Latitud_EXT_DMS"]
-        st.session_state["Latitud_EXT_DMS"] = temp_lat_dms
-
-        temp_lon_dms = st.session_state["Longitud_OP_DMS"]
-        st.session_state["Longitud_OP_DMS"] = st.session_state["Longitud_EXT_DMS"]
-        st.session_state["Longitud_EXT_DMS"] = temp_lon_dms
-
-        temp_elev = st.session_state["Elevacion_OP"]
-        st.session_state["Elevacion_OP"] = st.session_state["Elevacion_EXT"]
-        st.session_state["Elevacion_EXT"] = temp_elev
-
-        st.experimental_rerun()
+    # Botón para intercambiar coordenadas
+    if st.button("Intercambiar THR y EXT"):
+        for k1, k2 in [
+            ("Latitud_OP_DMS", "Latitud_EXT_DMS"),
+            ("Longitud_OP_DMS", "Longitud_EXT_DMS"),
+            ("Elevacion_OP", "Elevacion_EXT")
+        ]:
+            v1 = st.session_state.get(k1, "")
+            v2 = st.session_state.get(k2, "")
+            st.session_state[k1] = v2
+            st.session_state[k2] = v1
 
     st.markdown("__Datos Operativos__")
     t_aproximacion = st.selectbox('Tipo de Aproximación', ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
