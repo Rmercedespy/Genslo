@@ -1820,6 +1820,12 @@ def dms_to_decimal(dms):
     except Exception:
         return " "
 
+import streamlit as st
+
+# Simulación de la función dms_to_decimal
+def dms_to_decimal(dms_str):
+    return dms_str  # Simulación temporal
+
 def main():
     st.markdown(
     """
@@ -1863,7 +1869,7 @@ def main():
         Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
                                       value="", placeholder="ex.: -34.906414/  345430.23S/  34°54'30.23''S", key="Latitud_OP_DMS")
     with col2:
-        Latitud_OP_decimal = dms_to_decimal(Latitud_OP_DMS)  # Convertir a decimal
+        Latitud_OP_decimal = dms_to_decimal(Latitud_OP_DMS)
         st.text_input("Latitud en Decimales", value=Latitud_OP_decimal, disabled=True, key="Latitud_OP_dec")
 
     # Entrada para longitud
@@ -1872,7 +1878,7 @@ def main():
         Longitud_OP_DMS = st.text_input(f"Longitud - THR {Pista} [Grados Dec. sin (°) ó  DMS sin (0)]",
                                        value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W ", key="Longitud_OP_DMS")
     with col2:
-        Longitud_OP_decimal = dms_to_decimal(Longitud_OP_DMS)  # Convertir a decimal
+        Longitud_OP_decimal = dms_to_decimal(Longitud_OP_DMS)
         st.text_input("Longitud en Decimales", value=Longitud_OP_decimal, disabled=True, key="Longitud_OP_dec")
 
     Elevacion_OP = st.text_input(f"Elevación - THR {Pista} [m]", value="", key="Elevacion_OP", placeholder="ex.:  15.25 ")
@@ -1886,7 +1892,7 @@ def main():
         Latitud_EXT_DMS = st.text_input("Latitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
                                        value="", placeholder="ex.: -34.906414/ 345430.23S/  34°54'30.23''S", key="Latitud_EXT_DMS")
     with col2:
-        Latitud_EXT_decimal = dms_to_decimal(Latitud_EXT_DMS)  # Convertir a decimal
+        Latitud_EXT_decimal = dms_to_decimal(Latitud_EXT_DMS)
         st.text_input("Latitud en Decimales", value=Latitud_EXT_decimal, disabled=True, key="Latitud_EXT_dec")
 
     # Entrada para longitud del extremo
@@ -1895,12 +1901,42 @@ def main():
         Longitud_EXT_DMS = st.text_input("Longitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
                                         value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W", key="Longitud_EXT_DMS")
     with col2:
-        Longitud_EXT_decimal = dms_to_decimal(Longitud_EXT_DMS)  # Convertir a decimal
+        Longitud_EXT_decimal = dms_to_decimal(Longitud_EXT_DMS)
         st.text_input("Longitud en Decimales", value=Longitud_EXT_decimal, disabled=True, key="Longitud_EXT_dec")
 
     Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT", placeholder="ex.:  15.25 ")
-    st.divider()
 
+    # Botón pequeño para intercambiar datos
+    st.markdown(
+        """
+        <style>
+        div.stButton > button.small-button {
+            padding: 3px 10px;
+            font-size: 12px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    if st.button("Intercambiar THR <-> Ext.", key="swap_button"):
+        temp_lat = st.session_state["Latitud_OP_DMS"]
+        temp_lon = st.session_state["Longitud_OP_DMS"]
+        temp_elev = st.session_state["Elevacion_OP"]
+
+        st.session_state["Latitud_OP_DMS"] = st.session_state["Latitud_EXT_DMS"]
+        st.session_state["Longitud_OP_DMS"] = st.session_state["Longitud_EXT_DMS"]
+        st.session_state["Elevacion_OP"] = st.session_state["Elevacion_EXT"]
+
+        st.session_state["Latitud_EXT_DMS"] = temp_lat
+        st.session_state["Longitud_EXT_DMS"] = temp_lon
+        st.session_state["Elevacion_EXT"] = temp_elev
+
+    st.divider()
     st.markdown("__Datos Operativos__")
     t_aproximacion = st.selectbox('Tipo de Aproximación', ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
     n_clave = st.selectbox('N° de Clave de Referencia de Aeródromo', ['1', '2', '3', '4'])
@@ -1966,7 +2002,6 @@ def main():
         mime="text/plain",
         key="descargar_informe"
     )
-    
 
 if __name__ == '__main__':
     main()
