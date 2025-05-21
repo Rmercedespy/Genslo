@@ -1900,6 +1900,10 @@ def main():
 
     Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT", placeholder="ex.:  15.25 ")
     st.divider()
+  
+    st.button("Cambiar Pista de Operación",key="boton_invertir"):
+
+    st.divider()
 
     st.markdown("__Datos Operativos__")
     t_aproximacion = st.selectbox('Tipo de Aproximación', ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
