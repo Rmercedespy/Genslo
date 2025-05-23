@@ -1820,23 +1820,6 @@ def dms_to_decimal(dms):
     except Exception:
         return " "
 
-import streamlit as st
-
-# Suponiendo que tenés esta función en otro lugar
-def dms_to_decimal(dms_str):
-    # Convertir DMS a decimal - esta es una función de ejemplo
-    try:
-        return float(dms_str)  # Aquí deberías poner la conversión real
-    except:
-        return ""
-
-# Suponiendo que tenés estas funciones también
-def crear_genslo(nombre_ad, Pista, lon_OP, lat_OP, elev_OP, lon_EXT, lat_EXT, elev_EXT, ancho_Pista, t_aproximacion, n_clave, ref_SHI):
-    return "contenido_kml"
-
-documentoFinalKml = "contenido_kml"
-nombreFinal = "archivo_generado"
-
 def main():
     st.markdown(
     """
