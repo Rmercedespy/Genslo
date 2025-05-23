@@ -1871,15 +1871,11 @@ def main():
         st.session_state["Elevacion_OP"], st.session_state["Elevacion_EXT"] = st.session_state["Elevacion_EXT"], st.session_state["Elevacion_OP"]
     st.divider()
     st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
-    
+    #st.markdown(f" ")
     # Entrada para latitud
     col1, col2 = st.columns(2)
     with col1:
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown(f"Latitud - THR{Pista} ")
-        with col2:
-            Latitud_OP_DMS = st.text_input(label="[Grados Dec. sin (°) ó DMS sin (0)]", value="", placeholder="ex.: -34.906414 / 345430.23S / 34°54'30.23''S", key="Latitud_OP_DMS")
+        Latitud_OP_DMS = st.text_input(label="Latitud - THR{Pista} [Grados Dec. sin (°) ó DMS sin (0)]", value="", placeholder="ex.: -34.906414 / 345430.23S / 34°54'30.23''S", key="Latitud_OP_DMS")
         
                                                                                                                                         #Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
                                                                                                                                           #value="", placeholder="ex.: -34.906414/  345430.23S/  34°54'30.23''S", key="Latitud_OP_DMS")
