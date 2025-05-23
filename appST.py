@@ -1842,8 +1842,8 @@ def main():
     """
     <style>
     div.stButton > button:first-child {
-        background-color: #28a745;
-        color: white;
+        background-color: #28a745; /* Verde profesional */
+        color: white; /* Texto blanco */
         padding: 10px 20px;
         font-size: 16px;
         border-radius: 5px;
@@ -1851,12 +1851,11 @@ def main():
         cursor: pointer;
     }
     div.stButton > button:first-child:hover {
-        background-color: #218838;
+        background-color: #218838; /* Verde más oscuro al pasar el mouse */
     }
     </style>
     """,
     unsafe_allow_html=True)
-
     st.title("GENSLO beta v1.0")
     st.header("Superficies Limitadoras de Obstáculos - Según ANEXO 14 - OACI")
     st.subheader("Grupo de Transporte Aéreo (GTA) - UNLP")
@@ -1869,98 +1868,79 @@ def main():
     st.divider()
     st.markdown("__Datos del Aeródromo__")
     nombre_ad = st.text_input("Nombre de Aeródromo", placeholder="Nombre sin espacios, ex: SABE, AEP, Aeroparque")
-    Pista = st.text_input("Pista Seleccionada", placeholder="Indique el Número correspondiente al THR de Pista, ex.: 19")
-    ancho_Pista = st.text_input("Ancho de Pista [m]", placeholder="ex.: 45.25")
-
+    Pista = st.text_input("Pista Seleccionada", placeholder="Indique el Numero correspondiente al THR de Pista, ex.: 19")
+    ancho_Pista = st.text_input("Ancho de Pista [m]", value="", placeholder="ex.:  45.25 ")
     st.divider()
 
+    
+    
+    
+    # Inicializar valores en session_state si no existen
     for key in ["Latitud_OP_DMS", "Longitud_OP_DMS", "Elevacion_OP",
                 "Latitud_EXT_DMS", "Longitud_EXT_DMS", "Elevacion_EXT"]:
         if key not in st.session_state:
             st.session_state[key] = ""
-
+    
+    # Botón para invertir coordenadas y elevaciones
     if st.button("Invertir Puntos OP ↔ EXT"):
-        st.session_state["Latitud_OP_DMS"], st.session_state["Latitud_EXT_DMS"] = (
-            st.session_state["Latitud_EXT_DMS"], st.session_state["Latitud_OP_DMS"]
-        )
-        st.session_state["Longitud_OP_DMS"], st.session_state["Longitud_EXT_DMS"] = (
-            st.session_state["Longitud_EXT_DMS"], st.session_state["Longitud_OP_DMS"]
-        )
-        st.session_state["Elevacion_OP"], st.session_state["Elevacion_EXT"] = (
-            st.session_state["Elevacion_EXT"], st.session_state["Elevacion_OP"]
-        )
-
+        st.session_state["Latitud_OP_DMS"], st.session_state["Latitud_EXT_DMS"] = st.session_state["Latitud_EXT_DMS"], st.session_state["Latitud_OP_DMS"]
+        st.session_state["Longitud_OP_DMS"], st.session_state["Longitud_EXT_DMS"] = st.session_state["Longitud_EXT_DMS"], st.session_state["Longitud_OP_DMS"]
+        st.session_state["Elevacion_OP"], st.session_state["Elevacion_EXT"] = st.session_state["Elevacion_EXT"], st.session_state["Elevacion_OP"]
     st.divider()
     st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
-
+  
+    # Entrada para latitud
     col1, col2 = st.columns(2)
     with col1:
-        Latitud_OP_DMS = st.text_input(
-            f"Latitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
-            placeholder="ex.: -34.906414/ 345430.23S/ 34°54'30.23''S",
-            key="Latitud_OP_DMS"
-        )
+        Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
+                                      value="", placeholder="ex.: -34.906414/  345430.23S/  34°54'30.23''S", key="Latitud_OP_DMS")
     with col2:
-        Latitud_OP_decimal = dms_to_decimal(st.session_state["Latitud_OP_DMS"])
+        Latitud_OP_decimal = dms_to_decimal(Latitud_OP_DMS)  # Convertir a decimal
         st.text_input("Latitud en Decimales", value=Latitud_OP_decimal, disabled=True, key="Latitud_OP_dec")
 
+    # Entrada para longitud
     col1, col2 = st.columns(2)
     with col1:
-        Longitud_OP_DMS = st.text_input(
-            f"Longitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
-            placeholder="ex.: -57.943292/ 575630.91W/ 57°56'30.91''W",
-            key="Longitud_OP_DMS"
-        )
+        Longitud_OP_DMS = st.text_input(f"Longitud - THR {Pista} [Grados Dec. sin (°) ó  DMS sin (0)]",
+                                       value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W ", key="Longitud_OP_DMS")
     with col2:
-        Longitud_OP_decimal = dms_to_decimal(st.session_state["Longitud_OP_DMS"])
+        Longitud_OP_decimal = dms_to_decimal(Longitud_OP_DMS)  # Convertir a decimal
         st.text_input("Longitud en Decimales", value=Longitud_OP_decimal, disabled=True, key="Longitud_OP_dec")
 
-    Elevacion_OP = st.text_input(
-        f"Elevación - THR {Pista} [m]",
-        placeholder="ex.: 15.25",
-        key="Elevacion_OP"
-    )
-
+    Elevacion_OP = st.text_input(f"Elevación - THR {Pista} [m]", value="", key="Elevacion_OP", placeholder="ex.:  15.25 ")
     st.divider()
+
     st.markdown("Coordenadas del Extremo de Pista")
 
+    # Entrada para latitud del extremo
     col1, col2 = st.columns(2)
     with col1:
-        Latitud_EXT_DMS = st.text_input(
-            "Latitud - Ext. de Pista [Grados Dec. sin (°) ó DMS sin (0)]",
-            placeholder="ex.: -34.906414/ 345430.23S/ 34°54'30.23''S",
-            key="Latitud_EXT_DMS"
-        )
+        Latitud_EXT_DMS = st.text_input("Latitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
+                                       value="", placeholder="ex.: -34.906414/ 345430.23S/  34°54'30.23''S", key="Latitud_EXT_DMS")
     with col2:
-        Latitud_EXT_decimal = dms_to_decimal(st.session_state["Latitud_EXT_DMS"])
+        Latitud_EXT_decimal = dms_to_decimal(Latitud_EXT_DMS)  # Convertir a decimal
         st.text_input("Latitud en Decimales", value=Latitud_EXT_decimal, disabled=True, key="Latitud_EXT_dec")
 
+    # Entrada para longitud del extremo
     col1, col2 = st.columns(2)
     with col1:
-        Longitud_EXT_DMS = st.text_input(
-            "Longitud - Ext. de Pista [Grados Dec. sin (°) ó DMS sin (0)]",
-            placeholder="ex.: -57.943292/ 575630.91W/ 57°56'30.91''W",
-            key="Longitud_EXT_DMS"
-        )
+        Longitud_EXT_DMS = st.text_input("Longitud - Ext. de Pista [Grados Dec. sin (°) ó  DMS sin (0)]",
+                                        value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W", key="Longitud_EXT_DMS")
     with col2:
-        Longitud_EXT_decimal = dms_to_decimal(st.session_state["Longitud_EXT_DMS"])
+        Longitud_EXT_decimal = dms_to_decimal(Longitud_EXT_DMS)  # Convertir a decimal
         st.text_input("Longitud en Decimales", value=Longitud_EXT_decimal, disabled=True, key="Longitud_EXT_dec")
 
-    Elevacion_EXT = st.text_input(
-        "Elevación - Extremo de Pista [m]",
-        placeholder="ex.: 15.25",
-        key="Elevacion_EXT"
-    )
+    Elevacion_EXT = st.text_input("Elevación - Extremo de Pista [m]", value="", key="Elevacion_EXT", placeholder="ex.:  15.25 ")
 
     st.divider()
-    st.markdown("__Datos Operativos__")
 
+    st.markdown("__Datos Operativos__")
     t_aproximacion = st.selectbox('Tipo de Aproximación', ['Visual', 'No Precision', 'Precision CAT I', 'Precision CAT II o III'])
     n_clave = st.selectbox('N° de Clave de Referencia de Aeródromo', ['1', '2', '3', '4'])
     ref_SHI = st.selectbox('Elevación de Referencia de la Superficie Horizontal Interna (SHI)', ['RWY - THR', 'Punto Medio', 'RWY - Extremo'])
-
     st.divider()
 
+    # Botón para generar el archivo
     if st.button("Generar .kml", key="boton_kml"):
         contenido = crear_genslo(nombre_ad, Pista, Longitud_OP_decimal, Latitud_OP_decimal,
                                  Elevacion_OP, Longitud_EXT_decimal, Latitud_EXT_decimal,
@@ -1970,18 +1950,18 @@ def main():
         st.download_button(
             label="Descargar archivo",
             data=documentoFinalKml,
-            file_name=f"{nombreFinal}.kml",
+            file_name=f" {nombreFinal}.kml",
             mime="text/plain",
             key="descargar_kml"
         )
 
-    base_informe = f'''
+    base_informe = '''
     **************************************************************
     *                        INFORME                             *
     **************************************************************
-          Tipo de Aproximacion: {t_aproximacion}
+          Tipo de Aproximacion: ''' + t_aproximacion + '''
     *  _______________________________________________________   *
-    * |             --> Sentido Operación -->>                |  *
+    * |             --> ''' + 'Sentido Operación' + ''' -->>                |  *
       |   Sentido Operación             Sentido Operación     |  
     * |   ==                                               == |  *
     * |   ==     __   ___  ___   ___   ___   ___   __      == |  *
@@ -1989,37 +1969,37 @@ def main():
     * |_______________________________________________________|  *
     *                                                            *
     *                                                            *
-         Aeropuerto: {nombre_ad}
+         Aeropuerto: ''' + nombre_ad + '''                       
     *                                                            *
     *    --- Coordenadas de Umbrales (Geográficas Dec.) ---      *
     *    Aproximación                                            *
-          Latitud:   {Latitud_OP_decimal}°                   
-          Longitud:  {Longitud_OP_decimal}°                   
-          Elevación: {Elevacion_OP} m                    
+          Latitud:   ''' + str(Latitud_OP_decimal) + '''°                   
+          Longitud:  ''' + str(Longitud_OP_decimal) + '''°                   
+          Elevación: ''' + Elevacion_OP + '''m                    
     *                                                            *
     *    Extremo                                                 *
-          Latitud:   {Latitud_EXT_decimal}°                   
-          Longitud:  {Longitud_EXT_decimal}°                   
-          Elevación: {Elevacion_EXT} m                    
+          Latitud:   ''' + str(Latitud_EXT_decimal) + '''°                   
+          Longitud:  ''' + str(Longitud_EXT_decimal) + '''°                   
+          Elevación: ''' + Elevacion_EXT + '''m                    
     *                                                            *
     *     ------ Referencia Sup. Horizontal Interna ------       *
-          Referencia: {ref_SHI}
+          Referencia: ''' + ref_SHI + '''                           
     *                                                            *
-          Ancho de Pista: {ancho_Pista} m
+          Ancho de Pista: ''' + ancho_Pista + '''m
     *                                                            *
     *                                                            *
-          N° Clave: {n_clave}
+          N° Clave: ''' + n_clave + '''                       
     *                                                            *
-    **************************************************************
-    '''
+    **************************************************************  '''
 
     st.download_button(
         label="Descargar Informe",
         data=base_informe,
-        file_name=f"{nombre_ad}.txt",
+        file_name=f" {nombre_ad}.txt",
         mime="text/plain",
         key="descargar_informe"
     )
+    
 
 if __name__ == '__main__':
     main()
