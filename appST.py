@@ -1871,12 +1871,12 @@ def main():
         st.session_state["Elevacion_OP"], st.session_state["Elevacion_EXT"] = st.session_state["Elevacion_EXT"], st.session_state["Elevacion_OP"]
     st.divider()
     st.markdown(f"Coordenadas De Umbral de Pista {Pista}")
-    st.markdown(f"Latitud - THR{Pista} [Grados Dec. sin (°) ó DMS sin (0)]")
+    st.markdown(f"Latitud - THR{Pista} ")
     # Entrada para latitud
     col1, col2 = st.columns(2)
     with col1:
 
-        Latitud_OP_DMS = st.text_input(label="", value="", placeholder="ex.: -34.906414 / 345430.23S / 34°54'30.23''S", key="Latitud_OP_DMS")
+        Latitud_OP_DMS = st.text_input(label="[Grados Dec. sin (°) ó DMS sin (0)]", value="", placeholder="ex.: -34.906414 / 345430.23S / 34°54'30.23''S", key="Latitud_OP_DMS")
         
                                                                                                                                         #Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
                                                                                                                                           #value="", placeholder="ex.: -34.906414/  345430.23S/  34°54'30.23''S", key="Latitud_OP_DMS")
@@ -1885,14 +1885,14 @@ def main():
         st.text_input("Latitud en Decimales", value=Latitud_OP_decimal, disabled=True, key="Latitud_OP_dec")
 
     # Entrada para longitud
-    st.markdown(f"Longitud - THR {Pista} [Grados Dec. sin (°) ó  DMS sin (0)]")
+    st.markdown(f"Longitud - THR {Pista} ")
     col1, col2 = st.columns(2)
     with col1:
-        Longitud_OP_DMS = st.text_input(label="",value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W ", key="Longitud_OP_DMS")
+        Longitud_OP_DMS = st.text_input(label="[Grados Dec. sin (°) ó  DMS sin (0)]",value="", placeholder="ex.: -57.943292/ 575630.91W/  57°56'30.91''W ", key="Longitud_OP_DMS")
     with col2:
         Longitud_OP_decimal = dms_to_decimal(Longitud_OP_DMS)  # Convertir a decimal
         st.text_input("Longitud en Decimales", value=Longitud_OP_decimal, disabled=True, key="Longitud_OP_dec")
-    st.markdown(f"Elevación - THR {Pista} [m]")
+    st.markdown(f"Elevación [m] - THR {Pista} ")
     Elevacion_OP = st.text_input(label="", value="", key="Elevacion_OP", placeholder="ex.:  15.25 ")
     st.divider()
 
