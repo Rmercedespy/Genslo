@@ -1875,7 +1875,7 @@ def main():
     # Entrada para latitud
     col1, col2 = st.columns(2)
     with col1:
-        Latitud_OP_DMS = st.text_input(label="Latitud - THR{Pista} [Grados Dec. sin (°) ó DMS sin (0)]", value="", placeholder="ex.: -34.906414 / 345430.23S / 34°54'30.23''S", key="Latitud_OP_DMS")
+        Latitud_OP_DMS = st.text_input(label=f"Latitud - THR{Pista} [Grados Dec. sin (°) ó DMS sin (0)]", value="", placeholder="ex.: -34.906414 / 345430.23S / 34°54'30.23''S", key="Latitud_OP_DMS")
         
                                                                                                                                         #Latitud_OP_DMS = st.text_input(f"Latitud - THR {Pista} [Grados Dec. sin (°) ó DMS sin (0)]",
                                                                                                                                           #value="", placeholder="ex.: -34.906414/  345430.23S/  34°54'30.23''S", key="Latitud_OP_DMS")
