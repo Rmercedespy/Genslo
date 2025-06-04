@@ -991,7 +991,7 @@ def obtener(longitudFranja,anchuraFranja,
         ##En linea de franja 1 OP
           #h_tran_franja=hop_franja
         
-        d_pendiente_tran=hop_franja/(tran_pendiente/100)
+        d_pendiente_tran=45/(tran_pendiente/100)#hop_franja en lugar del 45 para probar
 
         dlatetal_franja=(ainterior/2)+d_pendiente_tran
 
