@@ -991,7 +991,7 @@ def obtener(longitudFranja,anchuraFranja,
         ##En linea de franja 1 OP
           #h_tran_franja=hop_franja
         
-        d_pendiente_tran=45/(tran_pendiente/100)#hop_franja en lugar del 45 para probar
+        d_pendiente_tran=hop_franja/(tran_pendiente/100)#hop_franja en lugar del 45 para probar
 
         dlatetal_franja=(ainterior/2)+d_pendiente_tran
 
@@ -1000,7 +1000,7 @@ def obtener(longitudFranja,anchuraFranja,
         tran_lateral_franjai_Long1,tran_lateral_franjai_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'i',dlatetal_franja)
         
         # para el extremo
-        tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,doperacion)
+        tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,a)#se prueba con a antes estaba el doperacion
         #En linea de franja 2 Extremo
         tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja)
         tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja)
