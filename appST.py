@@ -956,27 +956,31 @@ def obtener(longitudFranja,anchuraFranja,
     #======================================================================================================================================
     # Estas lineas de ARP sirven para la SHI y para la superficie de TRANSICION antes estaban solo en la SHI solamente
     #======================================================================================================================================
-    #hi_radio
+     #hi_radio
     if var==0:
-        ARP=umbral1Elev
+        hop_franja_op=45
+        hop_franja_ext=45-(umbral2Elev-umbral1Elev)
 
     elif var==1:
-        ARP=umbral2Elev
+        hop_franja_op=45+(umbral2Elev-umbral1Elev)
+        hop_franja_ext=45
+
 
     elif var==2:
-        ARP=(umbral2Elev+umbral1Elev)/2
+        hop_franja_op=45+((umbral2Elev+umbral1Elev)/2)-umbral1Elev
+        hop_franja_ext=45+((umbral2Elev+umbral1Elev)/2)-umbral2Elev    
     
-    #*******************************************************************************************
-    #*********************************** SUPERFICIE TRANSICION*************************
-    #*******************************************************************************************
-    tran_pendiente
+ 
+    tran_pendiente # son los 14.3 de transicion
     
-    h_op=umbral1Elev
+    h_op=umbral1Elev # elevacion de referencia
 
-    hop_franja=45+ARP-h_op #
+    #hop_franja=45+ARP-h_op #
     
 ##    print(f' hop_franja: {hop_franja}')
-    dop=hop_franja/(mprim/100)
+    dop=hop_franja_op/(mprim/100) # esto es par aencontrar la distancia desde el el umbral, por eso solo se toma el hop_franja_op
+   
+
     #print(f' dop: {dop}')
 
     if dop<=distprimer:
@@ -991,28 +995,32 @@ def obtener(longitudFranja,anchuraFranja,
         ##En linea de franja 1 OP
           #h_tran_franja=hop_franja
         
-        d_pendiente_tran=hop_franja/(tran_pendiente/100)#hop_franja en lugar del 45 para probar
+        d_pendiente_tran_op=hop_franja_op/(tran_pendiente/100)#hop_franja en lugar del 45 para probar
+        d_pendiente_tran_ext=hop_franja_op/(tran_pendiente/100)#hop_franja en lugar del 45 para probar
 
-        dlatetal_franja=(ainterior/2)+d_pendiente_tran
+        dlatetal_franja_op=(ainterior/2)+d_pendiente_tran_op
+        dlatetal_franja_ext=(ainterior/2)+d_pendiente_tran_ext
 
 
-        tran_lateral_franjad_Long1,tran_lateral_franjad_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'d',dlatetal_franja)
-        tran_lateral_franjai_Long1,tran_lateral_franjai_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'i',dlatetal_franja)
+
+        tran_lateral_franjad_Long1,tran_lateral_franjad_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'d',dlatetal_franja_op)
+        tran_lateral_franjai_Long1,tran_lateral_franjai_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'i',dlatetal_franja_op)
         
         # para el extremo
-        tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,a)#se prueba con a antes estaba el doperacion
+        tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,doperacion)#se prueba con a antes estaba el doperacion
         #En linea de franja 2 Extremo
-        tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja)
-        tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja)
+        tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja_ext)
+        tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja_ext)
 
         
     elif dop>distprimer:
         doperacion=dop
         dop1=distprimer
         hop2=distprimer*mprim/100
-        hopf=hop_franja-hop2
+        hopf=hop_franja_op-hop2
         dop2=hopf*100/msegunda
         d_lateral=(b/2)+(bdivergencia*doperacion/100)
+        
         tran_central_Long1,tran_central_Lat1=verticesLibre1( verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,distprimer)
         tran_central2_Long1,tran_central2_Lat1=verticesLibre1(tran_central_Long1,tran_central_Lat1,dop2)
         
@@ -1020,17 +1028,23 @@ def obtener(longitudFranja,anchuraFranja,
         tran_laterali_Long1,tran_laterali_Lat1=verticesfranja(alfaprima,tran_central2_Long1,tran_central2_Lat1,'i',d_lateral)
   
         #En linea de franja 1 OP
-        h_tran_franja=hop_franja
-        d_pendiente_tran=h_tran_franja/(tran_pendiente/100)
-        dlatetal_franja=d_lateral+d_pendiente_tran
-        tran_lateral_franjad_Long1,tran_lateral_franjad_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'d',dlatetal_franja)
-        tran_lateral_franjai_Long1,tran_lateral_franjai_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'i',dlatetal_franja)
+        h_tran_franja_op=hop_franja_op
+        h_tran_franja_ext=hop_franja_ext
+
+        d_pendiente_tran_op=h_tran_franja_op/(tran_pendiente/100)
+        d_pendiente_tran_ext=h_tran_franja_ext/(tran_pendiente/100)
+
+        dlatetal_franja_op=d_lateral+d_pendiente_tran_op
+        dlatetal_franja_ext=d_lateral+d_pendiente_tran_ext
+
+        tran_lateral_franjad_Long1,tran_lateral_franjad_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'d',dlatetal_franja_op)
+        tran_lateral_franjai_Long1,tran_lateral_franjai_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'i',dlatetal_franja_op)
         
         # para el extremo
         tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,doperacion)
         #En linea de franja 2 Extremo
-        tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja)
-        tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja)
+        tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja_ext)
+        tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja_ext)
 # ------------------------------------------------------------------------------------
 # ******************   CONversion de UTM a DeCimales **************
 # ------------------------------------------------------------------------------------
