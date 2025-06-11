@@ -1063,17 +1063,17 @@ def obtener(longitudFranja,anchuraFranja,
 # ------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------
 
-    pto_1_tran=str(tran_Dec_Long1)+','+ str(tran_Dec_Lat1)+','+ str(hop_franja+umbral1Elev)
-    pto_2_tran=str(tran_Dec_Long2)+','+ str(tran_Dec_Lat2)+','+ str(hop_franja+umbral1Elev)
-    pto_3_tran=str(tran_Dec_Long3)+','+ str(tran_Dec_Lat3)+','+ str(hop_franja+umbral1Elev)
+    pto_1_tran=str(tran_Dec_Long1)+','+ str(tran_Dec_Lat1)+','+ str(hop_franja_op+umbral1Elev)
+    pto_2_tran=str(tran_Dec_Long2)+','+ str(tran_Dec_Lat2)+','+ str(hop_franja_op+umbral1Elev)
+    pto_3_tran=str(tran_Dec_Long3)+','+ str(tran_Dec_Lat3)+','+ str(hop_franja_ext+umbral2Elev)
     pto_d4_tran=vfranja2Coord
     pto_d5_tran=vfranja1Coord
     
     
     
-    pto_4_tran=str(tran_Dec_Long4)+','+ str(tran_Dec_Lat4)+','+ str(hop_franja+umbral1Elev)
-    pto_5_tran=str(tran_Dec_Long5)+','+ str(tran_Dec_Lat5)+','+ str(hop_franja+umbral1Elev)
-    pto_6_tran=str(tran_Dec_Long6)+','+ str(tran_Dec_Lat6)+','+ str(hop_franja+umbral1Elev)
+    pto_4_tran=str(tran_Dec_Long4)+','+ str(tran_Dec_Lat4)+','+ str(hop_franja_op+umbral1Elev)
+    pto_5_tran=str(tran_Dec_Long5)+','+ str(tran_Dec_Lat5)+','+ str(hop_franja_op+umbral1Elev)
+    pto_6_tran=str(tran_Dec_Long6)+','+ str(tran_Dec_Lat6)+','+ str(hop_franja_ext+umbral2Elev)
     pto_i7_tran=vfranja4Coord
     pto_i8_tran=vfranja3Coord
     
@@ -1081,11 +1081,11 @@ def obtener(longitudFranja,anchuraFranja,
     ptos_area_tranI= pto_4_tran +'\n'+pto_5_tran +'\n'+pto_6_tran +'\n'+pto_i7_tran+'\n'+pto_i8_tran+'\n'+pto_4_tran
     
     #Puntos para la SHI en el ascenso en el despegue
-    pto_interno_asc1=str(vAsDecLong1)+','+str(vAsDecLat1)+','+str(hop_franja+umbral1Elev)
-    pto_interno_asc2=str(vAsDecLong2)+','+str(vAsDecLat2)+','+str(hop_franja+umbral1Elev)
-    dist_lateral_asc=((45+ARP-umbral2Elev)*(dep_divergencia/dep_pendiente))+(dep_linterior/2)# ecuacion simplificada para la distancia lateral respecto del eje en funcion de pendiente y divergencia 
+    pto_interno_asc1=str(vAsDecLong1)+','+str(vAsDecLat1)+','+str(hop_franja_ext+umbral2Elev)
+    pto_interno_asc2=str(vAsDecLong2)+','+str(vAsDecLat2)+','+str(hop_franja_ext+umbral2Elev)
+    dist_lateral_asc=(hop_franja_ext*(dep_divergencia/dep_pendiente))+(dep_linterior/2)# ecuacion simplificada para la distancia lateral respecto del eje en funcion de pendiente y divergencia 
     # Punto central a la longitud final respecto del inicio de la sup de asc despegue donde se alcanza los 45 m
-    longitud_asc=(45+ARP-umbral2Elev)*(100/dep_pendiente)
+    longitud_asc=hop_franja_ext*(100/dep_pendiente)
     lateral_asc=longitud_asc*dep_divergencia/100
 
     pto45_central_Long,pto45_central_Lat=verticesLibre2(verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,longitud_asc)# funcion para encontrar el punto central
@@ -1096,7 +1096,7 @@ def obtener(longitudFranja,anchuraFranja,
     dec_asc_Long1,dec_asc_Lat1=convertir_utm_dec(asc_Long1,asc_Lat1,hmf,huso)
     dec_asc_Long2,dec_asc_Lat2=convertir_utm_dec(asc_Long2,asc_Lat2,hmf,huso)
     # ELEVACION DEL PUNTO FINAL
-    elev45=45+ARP
+    elev45=hop_franja_ext
     
     pto_asc1=str(dec_asc_Long1)+','+str(dec_asc_Lat1)+','+str(elev45)
     pto_asc2=str(dec_asc_Long2)+','+str(dec_asc_Lat2)+','+str(elev45)
@@ -1157,7 +1157,7 @@ def obtener(longitudFranja,anchuraFranja,
 
     # --------------   SEMI- CIRCUNFERENCIA PUNTO 2 (DERECHA)  ------------------
     
-    hi_altura_final=hi_altura+ARP
+    hi_altura_final=hi_altura+hop_franja_op
     #print(f' hi_altura_final: {hi_altura_final}')
     cir_der=[]
     cir_der1=[]
@@ -1333,7 +1333,7 @@ def obtener(longitudFranja,anchuraFranja,
 
     # --------------   SEMI- CIRCUNFERENCIA PUNTO 2 (DERECHA)  ------------------
 
-    hi_altura_final = hi_altura + ARP
+    hi_altura_final = hi_altura + hop_franja_op
     c_hi_radio = hi_radio + (100 / c_pendiente) * c_altura
     cir_der = []
     cir_der1 = []
