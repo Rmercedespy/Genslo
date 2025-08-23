@@ -13,7 +13,7 @@ def obtener(longitudFranja,anchuraFranja,
                 linterior,distextremo,ddivergencia,anchofinal,longitud,pendiente,
                 tpendiente,
                 pendiente_conica,altura_conica):
-
+    
     global documentoFinalKml, nombreFinal
 
     a=longitudFranja
@@ -251,28 +251,23 @@ def obtener(longitudFranja,anchuraFranja,
             azimut=180-alfasexag
             alfaprima=(azimut-90)
    
-    #print(f" El azimut es : {azimut}")
-   
-    #print(f" Alfaprima: {alfaprima}")
-    #print(f" alfaprimas=(azimut-90): {alfaprimas}")
-
     semiancho_pista=ancho_pista/2
+    
     # ******************************************************************************************
-    #**** Calculo de las cordenadas de vertices de EJE DE PISTA EN UTM por ambos lados***********
+    #**** Funcion para Calcular las coordenadas de vertices para el lado derecho e izquierdo***********
     # ******************************************************************************************
 
     def vertices(angulosig,longitud,latitud,lado):
         if lado=='d':
-##            print(longitud)
-            angul=math.sin(math.radians(angulosig))
-##            print(f" math.sin(angulosig): {angul}")
-            vertice_Long=longitud+semiancho_pista*math.sin(math.radians(angulosig))# el abs nos asegura que el sen sea siempre positivo
-##            print(latitud)
+            #angul=math.sin(math.radians(angulosig))
+            vertice_Long=longitud+semiancho_pista*math.sin(math.radians(angulosig))
             vertice_Lat=latitud+semiancho_pista*(math.cos(math.radians(angulosig)))
+            
         elif lado=='i':
-            vertice_Long=longitud-semiancho_pista*math.sin(math.radians(angulosig)) # el abs nos asegura que el sen sea siempre positivo
+            vertice_Long=longitud-semiancho_pista*math.sin(math.radians(angulosig)) 
             vertice_Lat=latitud-semiancho_pista*(math.cos(math.radians(angulosig)))
         return vertice_Long,vertice_Lat
+    
     def verticesfranja(angulosig,longitud,latitud,lado,b_ancho):
         if lado=='d':
           #  print(longitud)
@@ -325,7 +320,7 @@ def obtener(longitudFranja,anchuraFranja,
     verticederLong3,verticederLat3=vertices(alfaprima,P1Long,P1Lat,'i')
     verticederLong4,verticederLat4=vertices(alfaprima,P2Long,P2Lat,'i')
 
-    #== Ejecucion de funcion para convertir de UTM a DEcimales para cargar en KML
+    #== Ejecucion de funcion para convertir de UTM a DEcimales para cargar en KML de la PISTA los 4 vertices
     verticeDecToKMLLong1,verticeDecToKMLLat1=convertir_utm_dec(verticederLong1,verticederLat1,hmf,huso)
     verticeDecToKMLLong2,verticeDecToKMLLat2=convertir_utm_dec(verticederLong2,verticederLat2,hmf,huso)
     verticeDecToKMLLong3,verticeDecToKMLLat3=convertir_utm_dec(verticederLong3,verticederLat3,hmf,huso)
@@ -344,8 +339,8 @@ def obtener(longitudFranja,anchuraFranja,
       </LineString>\n\
     </Placemark>'
     
-    #=========== Borde de pista ==============
-       # derecha
+    #=========== PISTA ==============
+    # derecha
     vertice1Coord=str(verticeDecToKMLLong1)+','+ str(verticeDecToKMLLat1)+','+ str(umbral1Elev)
     vertice2Coord=str(verticeDecToKMLLong2)+','+ str(verticeDecToKMLLat2)+','+ str(umbral2Elev)
     bordePistaD='    <Placemark> \n\
@@ -359,7 +354,7 @@ def obtener(longitudFranja,anchuraFranja,
       </LineString>\n\
     </Placemark>'
 
-       # Izquierda
+    # Izquierda
     vertice3Coord=str(verticeDecToKMLLong3)+','+ str(verticeDecToKMLLat3)+','+ str(umbral1Elev)
     vertice4Coord=str(verticeDecToKMLLong4)+','+ str(verticeDecToKMLLat4)+','+ str(umbral2Elev)
     bordePistaI='    <Placemark> \n\
@@ -392,11 +387,15 @@ def obtener(longitudFranja,anchuraFranja,
         </outerBoundaryIs>\n\
       </Polygon>\n\
     </Placemark>'
+
+    #=========== FIN PISTA ==============
+
+    
     #**************************************************************************
     # ********************************* FRANJA DE  PISTA **********************
     #**************************************************************************
 
-    verticeProlongacionPistaLong1,verticeProlongacionPistaLat1=verticesLibre1(P1Long,P1Lat,a) #puntos centrales 1
+    verticeProlongacionPistaLong1,verticeProlongacionPistaLat1=verticesLibre1(P1Long,P1Lat,a) #puntos centrales 1, a: es la distancia antes del THR y despues del Extremo 
     verticeProlongacionPistaLong2,verticeProlongacionPistaLat2=verticesLibre2(P2Long,P2Lat,a) #puntos centrales 2
     # ---------------- Vertices d franja --------------
     vfranjaderLong1,vfranjaderLat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'d',b)
@@ -841,13 +840,12 @@ def obtener(longitudFranja,anchuraFranja,
     #*******************************************************************************************
     #*********************************** FIN  DE SLO - Aproximacion ****************************
     #*******************************************************************************************
-#  ============================================================================================================================
+    #  ============================================================================================================================
+
     #  ============================================================================================================================
     #  !!!!!!!!!!!!!!!!!!!!!!!!!INICIO DE SUPERFICIE DE ASCENSO EN DESPEGUE !!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!
     #  ============================================================================================================================
     #  ============================================================================================================================
-    #Borrar esta linea de guia
-##    ,dep_distextremo,dep_divergencia,dep_anchofinal,dep_longitud,dep_pendiente
     # Funcion para trabajar la divergencia lateral
     def puntosDivergencia(pD_interior,pD_divergencia,pD_anchofinal,pD_longitud):
         dist_lado=(pD_anchofinal-pD_interior)/2
@@ -856,25 +854,18 @@ def obtener(longitudFranja,anchuraFranja,
         return dist_eje,distancia_lateral
 
     semidep_linterior=dep_linterior/2
-##    print(f'semidep_linterior: {semidep_linterior}')
+
    
     # ---------------- Vertices de ASCENSO sobre borde de franja--------------Pto 1 y Pto 2
-    
     vascensointerLong1,vascensointerLat1=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',semidep_linterior)
     vascensointerLong2,vascensointerLat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',semidep_linterior)
-##    print(f' vascensointerLong1: {vascensointerLong1} \n vascensointerLat1: {vascensointerLat1}')
-##    print(f' vascensointerLong2: {vascensointerLong2} \n vascensointerLat2: {vascensointerLat2}')
 
-    # ----- Vertices de Aproximacion  complemntarios --------
-   
+    # ----- Vertices de Aproximacion  complemntarios --------  
     # Punto central inicial sobre franja
 
     distancia_eje,distancia_lateral=puntosDivergencia(dep_linterior,dep_divergencia,dep_anchofinal,dep_longitud) # Obtencion de longitud donde alcanza la divergencia lateral
-##    print(f' distancia_eje {distancia_eje}')
-##    print(f' verticeProlongacionPistaLong2 {verticeProlongacionPistaLong2}')
-##    print(f' verticeProlongacionPistaLat2 {verticeProlongacionPistaLat2}')
+
     vcentralAsDepsecLong1,vcentralAsDepsecLat1=verticesLibre2(verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,distancia_eje) #puntos centrales del fin de seccion donde alcanza la divegencia
-##    print(f' vcentralAsDepsecLong1: {vcentralAsDepsecLong1} \n vcentralAsDepsecLat1: {vcentralAsDepsecLat1}')
 
     # Obtencion de cordenadas laterales desde el punto central donde se alcanza la divergencia lateral
     vdivLateralLong1,vdivLateralLat1=verticesfranja(alfaprima,vcentralAsDepsecLong1,vcentralAsDepsecLat1,'d',distancia_lateral)
@@ -895,13 +886,11 @@ def obtener(longitudFranja,anchuraFranja,
 # ------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------
 
-##    print(f' nClave: {nClave}')
-
     if combo2==1 or combo2==2:
         h_umbral2=umbral2Elev
         hf_pendiente=(distancia_eje*dep_pendiente)/100+h_umbral2
         pto_1_asc=str(vAsDecLong1)+','+ str(vAsDecLat1)+','+ str(umbral2Elev)
-##        print(f' pto_1_asc: {pto_1_asc}')
+
         pto_2_asc=str(vAsDecLong2)+','+ str(vAsDecLat2)+','+ str(umbral2Elev)
         pto_3_asc=str(vAsDecDivergLong1)+','+ str(vAsDecDivergLat1)+','+ str(hf_pendiente)
         pto_4_asc=str(vAsDecDivergLong2)+','+ str(vAsDecDivergLat2)+','+ str(hf_pendiente)
@@ -909,7 +898,7 @@ def obtener(longitudFranja,anchuraFranja,
         
     elif combo2==3 or combo2==4:
         h_umbral2=umbral2Elev
-##        print(f' h_umbral2: {h_umbral2}')
+
         hf_pendiente=(distancia_eje*dep_pendiente)/100+h_umbral2# zona sin divergencia
         hf_pendiente2=(dep_longitud*dep_pendiente)/100+h_umbral2
         distancia_eje2=dep_longitud-distancia_eje
@@ -918,7 +907,7 @@ def obtener(longitudFranja,anchuraFranja,
         vAs_final_Long1,vAs_final_Lat1=convertir_utm_dec(VLong1,VLat1,hmf,huso)#conversion de UTM a Decimales
         vAs_final_Long2,vAs_final_Lat2=convertir_utm_dec(VLong2,VLat2,hmf,huso)
         pto_1_asc=str(vAsDecLong1)+','+ str(vAsDecLat1)+','+ str(umbral2Elev)# Armando de puntos con cordenadas en Decimales
-##        print(f' pto_1_asc: {pto_1_asc}')
+
         pto_2_asc=str(vAsDecLong2)+','+ str(vAsDecLat2)+','+ str(umbral2Elev)
         pto_3_asc=str(vAsDecDivergLong1)+','+ str(vAsDecDivergLat1)+','+ str(hf_pendiente)
         pto_4_asc=str(vAsDecDivergLong2)+','+ str(vAsDecDivergLat2)+','+ str(hf_pendiente)
@@ -927,8 +916,6 @@ def obtener(longitudFranja,anchuraFranja,
         ptos_area_ASC= pto_1_asc+'\n'+pto_2_asc+'\n'+pto_4_asc+'\n'+pto_6_asc+'\n'+pto_5_asc+'\n'+pto_3_asc+'\n'+pto_1_asc
 
         # Area de ASCENSO en despegue
-
-
     areaASC='<Placemark>\n\
           <description>0</description>\n\
           <styleUrl>#ASC</styleUrl>\n\
@@ -943,10 +930,6 @@ def obtener(longitudFranja,anchuraFranja,
               </outerBoundaryIs>\n\
           </Polygon>\n\
           </Placemark>'
-    
-
-##    
-
     # ============================================================================================================
     #  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!FIN SUPERFICIE DE ASCENSO EN DESPEGUE !!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!
     # ============================================================================================================
@@ -959,12 +942,15 @@ def obtener(longitudFranja,anchuraFranja,
     #hi_radio
     if var==0:
         ARP=umbral1Elev
+        hop_franja_ext=45-(umbral2Elev-ARP)
 
     elif var==1:
         ARP=umbral2Elev
+        hop_franja_ext=45
 
     elif var==2:
         ARP=(umbral2Elev+umbral1Elev)/2
+        hop_franja_ext=45-umbral2Elev-ARP
     
     #*******************************************************************************************
     #*********************************** SUPERFICIE TRANSICION*************************
@@ -972,12 +958,9 @@ def obtener(longitudFranja,anchuraFranja,
     #tran_pendiente
     
     h_op=umbral1Elev
-
-    hop_franja=45+ARP-h_op #
-    
-##    print(f' hop_franja: {hop_franja}')
+    hop_franja=45+ARP-h_op #   
     dop=hop_franja/(mprim/100)
-    #print(f' dop: {dop}')
+
 
     if dop<=distprimer:
         doperacion=dop
@@ -999,11 +982,13 @@ def obtener(longitudFranja,anchuraFranja,
         tran_lateral_franjad_Long1,tran_lateral_franjad_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'d',dlatetal_franja)
         tran_lateral_franjai_Long1,tran_lateral_franjai_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'i',dlatetal_franja)
         
-        # para el extremo
-        tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,doperacion)
+##       EXTREMO-------------
+##        tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,doperacion)
+        
+        dlatetal_franja_EXTREMO=b+hop_franja_ext/(tran_pendiente/100)
         #En linea de franja 2 Extremo
-        tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja)
-        tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja)
+        tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja_EXTREMO)
+        tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja_EXTREMO)
 
         
     elif dop>distprimer:
@@ -1026,11 +1011,12 @@ def obtener(longitudFranja,anchuraFranja,
         tran_lateral_franjad_Long1,tran_lateral_franjad_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'d',dlatetal_franja)
         tran_lateral_franjai_Long1,tran_lateral_franjai_Lat1=verticesfranja(alfaprima,verticeProlongacionPistaLong1,verticeProlongacionPistaLat1,'i',dlatetal_franja)
         
-        # para el extremo
-        tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,doperacion)
+##        # para el extremo
+##        tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,doperacion)
+        dlatetal_franja_EXTREMO=b+hop_franja_ext/(tran_pendiente/100)
         #En linea de franja 2 Extremo
-        tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja)
-        tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja)
+        tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja_EXTREMO)
+        tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima,verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja_EXTREMO)
 # ------------------------------------------------------------------------------------
 # ******************   CONversion de UTM a DeCimales **************
 # ------------------------------------------------------------------------------------
