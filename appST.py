@@ -1963,7 +1963,7 @@ def main():
           Ancho de Pista: ''' + ancho_Pista + '''m
     *                                                            *
     *                                                            *
-          N° Clave: ''' + n_clave + '''                       
+          ESTA ACTUALIZADO 5.52 ''' + n_clave + '''                       
     *                                                            *
     **************************************************************  '''
 
@@ -1978,6 +1978,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 
