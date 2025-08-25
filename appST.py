@@ -986,6 +986,7 @@ def obtener(longitudFranja,anchuraFranja,
 ##        tran_central_Long2,tran_central_Lat2=verticesLibre2( verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,doperacion)
         
         dlatetal_franja_EXTREMO=b+hop_franja_ext/(tran_pendiente/100)
+        print(f"dlatetal_franja_EXTREMO: {dlatetal_franja_EXTREMO}")
         #En linea de franja 2 Extremo
         tran_lateral_franjad_Long2,tran_lateral_franjad_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'d',dlatetal_franja_EXTREMO)
         tran_lateral_franjai_Long2,tran_lateral_franjai_Lat2=verticesfranja(alfaprima, verticeProlongacionPistaLong2,verticeProlongacionPistaLat2,'i',dlatetal_franja_EXTREMO)
@@ -1974,3 +1975,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
